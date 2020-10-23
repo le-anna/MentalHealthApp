@@ -2,8 +2,9 @@ package controllers;
 
 import java.util.*;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,16 +15,22 @@ import Backend.UserInfo;
 import service.UserInfoService;
 
 
-@Controller
+@RestController
 public class UserInfoController {
 
 	@Autowired
 	private UserInfoService userinfoSer;
 	
-	@GetMapping(path="/user") 
-	public @ResponseBody List<UserInfo> getUsers() {
-		System.out.println("Enters");
+	@GetMapping("/user") 
+	public List<UserInfo> getUsers() {
 		return userinfoSer.getUsers();
+	}
+	
+	@GetMapping("/test")
+	public int getTest() {
+		System.out.println("Enters");
+		int x = 5;
+		return x;
 	}
 
 	

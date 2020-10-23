@@ -1,6 +1,7 @@
 
 package Backend;
 import java.util.*;
+import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -14,6 +15,8 @@ public class MoodEntry {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int MooodEntryID;
 	
+	//private Date date;
+	
 	
 	@OneToMany(mappedBy = "mood_entry")
 	private List<Mood> moodList = new ArrayList<Mood>();
@@ -21,6 +24,7 @@ public class MoodEntry {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="UserID", nullable=false)
 	public UserInfo user_info;
+	
 
 	
 	public MoodEntry() {}
