@@ -1,11 +1,13 @@
 package Backend;
 
-import java.util.*;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity()
 @Table(name = "dbo.UserInfo")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserInfo {
 	
 	@Id

@@ -12,11 +12,14 @@ import respository.UserInfoRepository;
 @Transactional
 public class UserInfoService {
 
-@Autowired
-private UserInfoRepository userInfoRepository;
-
-public List<UserInfo> getUsers() {
-	return userInfoRepository.findAll();
-}
-
+	@Autowired
+	private UserInfoRepository userInfoRepository;
+	
+	public List<UserInfo> getUsers() {
+		return userInfoRepository.findAll();
+	}
+	
+	public UserInfo getUser(int userID) {
+		return userInfoRepository.getOne(userID);
+	}
 }
