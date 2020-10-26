@@ -6,10 +6,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import Backend.UserInfo;
 import service.UserInfoService;
@@ -21,9 +18,14 @@ public class UserInfoController {
 	@Autowired
 	private UserInfoService userinfoSer;
 	
-	@GetMapping("/user") 
+	@GetMapping("/users") 
 	public List<UserInfo> getUsers() {
 		return userinfoSer.getUsers();
+	}
+	
+	@GetMapping("/user/{userID}")
+	public UserInfo getUser(@PathVariable int userID) {
+		return userinfoSer.getUser(userID);
 	}
 	
 	@GetMapping("/test")
