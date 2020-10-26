@@ -13,7 +13,7 @@ public class MoodEntry {
 	@Id
 	@Column(name="MoodEntryID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int MooodEntryID;
+	private int MoodEntryID;
 	
 	//private Date date;
 	

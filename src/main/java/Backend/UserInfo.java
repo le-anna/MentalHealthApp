@@ -1,22 +1,21 @@
 package Backend;
 
-import java.util.*;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity()
-@Table(name = "UserInfo")
+@Table(name = "dbo.UserInfo")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserInfo {
 	
 	@Id
-	@Column(name="UserID")
+	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int UserID;
 	
 	private String name;
-	
-	@OneToMany(mappedBy = "user_info")
-	private List<MoodEntry> entryList = new ArrayList<MoodEntry>();
 	
 	
 	public UserInfo() {
