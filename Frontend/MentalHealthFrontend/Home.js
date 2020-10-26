@@ -1,10 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, fontFamily, ImageBackground, Button } from 'react-native';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from './circleTest.png';
 
 
 export default function Home ({navigation}) {
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:8080/users')
+        .then((response) => response.json())
+        .then((json) => setData(json.name))
+        .catch((error) => console.error(error)
+    );}, []);
+
+
     return (
         <View style={styles.container}>  
             <ImageBackground source={logo} style={styles.image}>
@@ -22,10 +31,6 @@ export default function Home ({navigation}) {
         
         </View>
     )
-}
-const HomeText = () =>{
-
-    {titleText}
 }
 
 const styles = StyleSheet.create({
