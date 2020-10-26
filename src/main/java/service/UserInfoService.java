@@ -6,17 +6,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import Backend.UserInfo;
-import respository.UserInfoDAO;
+import respository.UserInfoRepository;
 
 @Service
+@Transactional
 public class UserInfoService {
 
 @Autowired
-private UserInfoDAO userinfoDAO;
+private UserInfoRepository userInfoRepository;
 
-@Transactional
 public List<UserInfo> getUsers() {
-	return userinfoDAO.getUsers();
+	return userInfoRepository.findAll();
 }
 
 }
