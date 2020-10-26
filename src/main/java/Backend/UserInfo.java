@@ -5,18 +5,15 @@ import javax.persistence.*;
 
 
 @Entity()
-@Table(name = "UserInfo")
+@Table(name = "dbo.UserInfo")
 public class UserInfo {
 	
 	@Id
-	@Column(name="UserID")
+	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int UserID;
 	
 	private String name;
-	
-	@OneToMany(mappedBy = "user_info")
-	private List<MoodEntry> entryList = new ArrayList<MoodEntry>();
 	
 	
 	public UserInfo() {
