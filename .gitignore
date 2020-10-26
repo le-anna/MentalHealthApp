@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 Frontend/MentalHealthFrontend/node_modules/
+Frontend/MentalHealthFrontend/.expo/
 
 ### STS ###
 .apt_generated
