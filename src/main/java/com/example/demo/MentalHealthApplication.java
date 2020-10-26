@@ -12,8 +12,8 @@ public class MentalHealthApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MentalHealthApplication.class, args);
-//		UserInfoDAO userTest = new UserInfoDAO();
-//		userTest.getUsers();
+		UserInfoDAO userTest = new UserInfoDAO();
+		userTest.getUsers();
 	}
 
 }
