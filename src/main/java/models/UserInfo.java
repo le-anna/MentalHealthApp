@@ -1,4 +1,4 @@
-package Backend;
+package models;
 
 import javax.persistence.*;
 
@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity()
-@Table(name = "dbo.UserInfo")
+@Table(name = "user_info")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserInfo {
 	
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int UserID;
+	private int user_id;
 	
 	private String name;
 	
@@ -27,7 +27,7 @@ public class UserInfo {
 	}
 	
 	public int getUserID() {
-		return UserID;
+		return user_id;
 	}
 	
 	public String getName() {

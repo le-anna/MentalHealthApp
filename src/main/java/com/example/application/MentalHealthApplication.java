@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,19 +6,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
-@EnableJpaRepositories("respository")
-@EntityScan("Backend")
-@ComponentScan({"controllers", "service", "respository", "Backend"})
+@SpringBootApplication()
+@EnableJpaRepositories("repository")
+@EntityScan("models")
+@ComponentScan({"controllers", "service", "repository", "models"})
 public class MentalHealthApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MentalHealthApplication.class, args);
-<<<<<<< HEAD
-		UserInfoDAO userTest = new UserInfoDAO();
-		userTest.getUsers();
-=======
->>>>>>> 11bc15324ea695b78c71c6aaec60f39b66ed71e7
 	}
 
 }

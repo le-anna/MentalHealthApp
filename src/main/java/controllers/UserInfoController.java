@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import Backend.UserInfo;
+import models.UserInfo;
 import service.UserInfoService;
 
 
@@ -27,13 +27,5 @@ public class UserInfoController {
 	public UserInfo getUser(@PathVariable int userID) {
 		return userinfoSer.getUser(userID);
 	}
-	
-	@GetMapping("/test")
-	public int getTest() {
-		System.out.println("Enters");
-		int x = 5;
-		return x;
-	}
 
-	
 }

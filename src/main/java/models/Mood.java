@@ -1,21 +1,21 @@
-package Backend;
+package models;
 import javax.persistence.*;
 
 @Entity 
-
+@Table(name = "mood")
 public class Mood {
 	
 	@Id
-	@Column(name="MoodID")
+	@Column(name="mood_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int MoodID;
+	private int mood_id;
 	
 	private String name;
 	
 	private int scale;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="MoodEntryID", nullable=false)
+	@JoinColumn(name="mood_entry_id", nullable=false)
 	public MoodEntry mood_entry;
 
 	public Mood(String name, int scale) {

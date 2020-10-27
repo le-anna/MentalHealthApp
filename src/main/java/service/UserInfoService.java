@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import Backend.UserInfo;
-import respository.UserInfoRepository;
+import models.UserInfo;
+import repository.UserInfoRepository;
 
 @Service
 @Transactional
@@ -22,4 +22,5 @@ public class UserInfoService {
 	public UserInfo getUser(int userID) {
 		return userInfoRepository.getOne(userID);
 	}
+
 }

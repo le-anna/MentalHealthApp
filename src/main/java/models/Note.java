@@ -1,4 +1,4 @@
-package Backend;
+package models;
 
 public class Note {
 	private String note;

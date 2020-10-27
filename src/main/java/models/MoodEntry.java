@@ -1,19 +1,17 @@
 
-package Backend;
+package models;
 import java.util.*;
-import java.sql.Date;
 
 import javax.persistence.*;
 
-
 @Entity
-
+@Table(name = "mood_entry")
 public class MoodEntry {
 	
 	@Id
-	@Column(name="MoodEntryID")
+	@Column(name="mood_entry_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int MoodEntryID;
+	private int mood_entry_id;
 	
 	//private Date date;
 	
@@ -23,19 +21,17 @@ public class MoodEntry {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="UserID", nullable=false)
-	public UserInfo user_info;
-	
-
+	public UserInfo UserID;
 	
 	public MoodEntry() {}
 	
 	
 	void setUserInfo(UserInfo user_info) {
-		this.user_info = user_info;
+		this.UserID = user_info;
 	}
 	
 	void saveMoodEntry(UserInfo user_info, Mood mood) {
-		this.user_info = user_info;
+		this.UserID = user_info;
 		moodList.add(mood);
 	}
 }
