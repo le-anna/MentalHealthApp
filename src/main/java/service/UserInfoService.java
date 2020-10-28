@@ -23,4 +23,8 @@ public class UserInfoService {
 		return userInfoRepository.getOne(userID);
 	}
 
+	public UserInfo saveUser(UserInfo user) {
+		return userInfoRepository.save(user);
+	}
+
 }

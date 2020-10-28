@@ -1,32 +1,43 @@
-import React from 'react';
-import { StyleSheet, Text, View, fontFamily, ImageBackground, Button } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, ImageBackground, Button } from 'react-native';
 import { useState, useEffect } from "react";
 import logo from './circleTest.png';
 
 
 export default function Home ({navigation}) {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:8080/users')
-        .then((response) => response.json())
-        .then((json) => setData(json.name))
-        .catch((error) => console.error(error)
-    );}, []);
+    const [userName, setUserName] = useState([]);
+    const [testName, testSetName] = useState([]);
 
+    useEffect(() => {
+        fetch('/user/1', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+        .then((response) => response.json())
+        .then((json) => testSetName(json.name))
+        .catch((error) => console.error(error))
+    }, []);
 
     return (
         <View style={styles.container}>  
             <ImageBackground source={logo} style={styles.image}>
-            <Text style={styles.text}>Hello, Name!</Text>
+            <Text style={styles.text}>
+                 Hello
+            </Text>
+            <TextInput style={styles.text}
+                onChangeText={(val) => setUserName(val)}/>
+            <Text> name: {userName}</Text>
+            <Text> works: {testName.name}</Text>
             <Button 
                 title="Add Entry"
-                style={{backgroundColor: '#00000000', fontFamily: 'Avenir', width: 20, height: 50, alignSelf: 'center'}}
                 onPress={() => navigation.navigate('AddEntry')}
-                />
-                <Button 
+            />
+            <Button 
                 title="View Statistics"
                 onPress={() => navigation.navigate('Statistics')}
-                />
+            />
             </ImageBackground>
         
         </View>
