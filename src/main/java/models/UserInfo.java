@@ -12,14 +12,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserInfo {
 	
 	@Id
-	@Column
+	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int user_id;
+	private int id;
 	
 	private String name;
 	
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "user_info")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "user")
 	private List<MoodEntry> entry_list = new ArrayList<MoodEntry>();
 	
 	public UserInfo() {
@@ -31,7 +31,7 @@ public class UserInfo {
 	}
 	
 	public int getUserID() {
-		return user_id;
+		return id;
 	}
 	
 	public String getName() {

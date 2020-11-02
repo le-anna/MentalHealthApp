@@ -19,8 +19,8 @@ public class UserInfoService {
 		return userInfoRepository.findAll();
 	}
 	
-	public UserInfo getUser(int userID) {
-		return userInfoRepository.getOne(userID);
+	public UserInfo getUser(int user_id) {
+		return userInfoRepository.getOne(user_id);
 	}
 
 	public UserInfo saveUser(UserInfo user) {

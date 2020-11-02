@@ -8,15 +8,19 @@ public class Mood {
 	@Id
 	@Column(name="mood_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int mood_id;
+	private int moodId;
 	
 	private String name;
 	
 	private int scale;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="mood_entry_id", nullable=false)
-	public MoodEntry mood_entry;
+	@JoinColumn(name="moodEntryId", nullable=false)
+	public MoodEntry moodEntry;
+
+	public Mood() {
+
+	}
 
 	public Mood(String name, int scale) {
 		this.name = name;
@@ -32,7 +36,7 @@ public class Mood {
 	}
 	
 	public MoodEntry getMoodEntry(){
-		return mood_entry;
+		return moodEntry;
 	}
 	
 	public void setName(String name) {
@@ -43,7 +47,7 @@ public class Mood {
 	}
 	
 	public void setMoodEntry(MoodEntry mood_entry){
-		this.mood_entry = mood_entry;
+		this.moodEntry = mood_entry;
 	}
 	
 	

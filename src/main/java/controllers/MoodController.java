@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import models.Mood;
-import models.MoodEntry;
 import repository.MoodEntryRepository;
 import repository.MoodRepository;
 import service.MoodService;
@@ -25,14 +24,14 @@ public class MoodController {
 
     @Autowired
     private MoodRepository mood_repo;
-    
-    @Autowired
+
+    @Autowired 
     private MoodEntryRepository mood_entry_repo;
 	
 	@GetMapping("/moods") 
 	public List<Mood> getMoods() {
-		return mood_service.getMoods();
-	}
+		return mood_repo.findAll();
+    }
     
     @PostMapping("/entry/{mood_entry_id}/mood") 
 	public Mood saveMood(@PathVariable (value = "mood_entry_id") int mood_entry_id, @RequestBody Mood mood) {

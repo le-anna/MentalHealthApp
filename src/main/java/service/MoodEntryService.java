@@ -19,6 +19,10 @@ public class MoodEntryService {
 		return entry_repo.findAll();
 	}
 
+	public List<MoodEntry> findByUserId(int user_id) {
+		return entry_repo.findByUserId(user_id);
+	}
+
 	public MoodEntry saveEntry(MoodEntry entry) {
 		return entry_repo.save(entry);
 	}

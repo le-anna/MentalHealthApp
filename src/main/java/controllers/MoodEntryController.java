@@ -35,6 +35,12 @@ public class MoodEntryController {
 		return entry_service.getEntries();
 	}
 
+
+	@GetMapping("/user/{user_id}/entries") 
+	public List<MoodEntry> findByUserId(@PathVariable ("user_id")  int user_id) {
+		return entry_service.findByUserId(user_id);
+	}
+
 	@PostMapping("/user/{user_id}/entry") 
 	public MoodEntry saveEntry(@PathVariable (value = "user_id") int user_id, @RequestBody MoodEntry newEntry) {
 		return user_repo.findById(user_id).map(user -> {

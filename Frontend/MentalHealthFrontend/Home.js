@@ -5,11 +5,11 @@ import logo from './circleTest.png';
 
 
 export default function Home ({navigation}) {
-    const [userName, setUserName] = useState([]);
+    const [username, setUserName] = useState([]);
     const [testName, testSetName] = useState([]);
 
     useEffect(() => {
-        fetch('/user/1', {
+        fetch('http://localhost:8080/user/1', {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
@@ -17,7 +17,7 @@ export default function Home ({navigation}) {
             }
         })
         .then((response) => response.json())
-        .then((json) => testSetName(json.name))
+        .then((json) => setUserName(json.name))
         .catch((error) => console.error(error))
     }, []);
 
@@ -25,12 +25,11 @@ export default function Home ({navigation}) {
         <View style={styles.container}>  
             <ImageBackground source={logo} style={styles.image}>
             <Text style={styles.text}>
-                 Hello
+                 Hello,  
+                 {username}
             </Text>
             <TextInput style={styles.text}
                 onChangeText={(val) => setUserName(val)}/>
-            <Text> name: {userName}</Text>
-            <Text> works: {testName.name}</Text>
             <Button 
                 title="Add Entry"
                 onPress={() => navigation.navigate('AddEntry')}
