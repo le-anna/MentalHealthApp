@@ -10,8 +10,9 @@ export default function Home ({navigation}) {
 
     useEffect(() => {
         fetch('/user/1', {
+            method: 'GET',
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-Type': 'application/json',
             }
         })

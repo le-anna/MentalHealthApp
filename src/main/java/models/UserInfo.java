@@ -1,5 +1,6 @@
 package models;
 
+import java.util.*;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,6 +18,9 @@ public class UserInfo {
 	
 	private String name;
 	
+
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "user_info")
+	private List<MoodEntry> entry_list = new ArrayList<MoodEntry>();
 	
 	public UserInfo() {
 		
@@ -37,6 +41,5 @@ public class UserInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 }

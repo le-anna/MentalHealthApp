@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "mood_entry")
 public class MoodEntry {
@@ -13,26 +14,34 @@ public class MoodEntry {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mood_entry_id;
 	
-	//private Date date;
-	
 	
 	@OneToMany(mappedBy = "mood_entry")
 	private List<Mood> moodList = new ArrayList<Mood>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="UserID", nullable=false)
-	public UserInfo UserID;
+	@JoinColumn(name="user_id", nullable=false)
+	public UserInfo user_info;
+
+	private String date;
 	
 	public MoodEntry() {}
 	
-	
-	void setUserInfo(UserInfo user_info) {
-		this.UserID = user_info;
+	public MoodEntry(String date, UserInfo user_info) {
+		this.date = date;
+		this.user_info = user_info;
 	}
 	
-	void saveMoodEntry(UserInfo user_info, Mood mood) {
-		this.UserID = user_info;
-		moodList.add(mood);
+	public void setUserInfo(UserInfo user) {
+		this.user_info = user;
 	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getDate() {
+		return date;
+	}
+	
 }
 
