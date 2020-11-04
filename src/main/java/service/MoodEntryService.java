@@ -13,18 +13,18 @@ import repository.MoodEntryRepository;
 public class MoodEntryService {
 
 	@Autowired
-	private MoodEntryRepository entry_repo;
+	private MoodEntryRepository moodEntryRepo;
 	
 	public List<MoodEntry> getEntries() {
-		return entry_repo.findAll();
+		return moodEntryRepo.findAll();
 	}
 
 	public List<MoodEntry> findByUserId(int user_id) {
-		return entry_repo.findByUserId(user_id);
+		return moodEntryRepo.findByUserId(user_id);
 	}
 
 	public MoodEntry saveEntry(MoodEntry entry) {
-		return entry_repo.save(entry);
+		return moodEntryRepo.save(entry);
 	}
 
 }

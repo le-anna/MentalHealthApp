@@ -1,4 +1,5 @@
 package models;
+
 import javax.persistence.*;
 
 @Entity 
@@ -8,18 +9,22 @@ public class Mood {
 	@Id
 	@Column(name="mood_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int moodId;
+	private int id;
 	
 	private String name;
 	
 	private int scale;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="moodEntryId", nullable=false)
-	public MoodEntry moodEntry;
+	@JoinColumn(name="mood_entry_id", nullable=false)
+	public MoodEntry entry;
+
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id", nullable=false)
+	public UserInfo user;
 
 	public Mood() {
-
 	}
 
 	public Mood(String name, int scale) {
@@ -36,7 +41,11 @@ public class Mood {
 	}
 	
 	public MoodEntry getMoodEntry(){
-		return moodEntry;
+		return entry;
+	}
+
+	public UserInfo getUser() {
+		return entry.getUser();
 	}
 	
 	public void setName(String name) {
@@ -46,9 +55,11 @@ public class Mood {
 		this.scale = scale;
 	}
 	
-	public void setMoodEntry(MoodEntry mood_entry){
-		this.moodEntry = mood_entry;
+	public void setMoodEntry(MoodEntry entry){
+		this.entry = entry;
 	}
 	
-	
+	public void setUser(UserInfo user){
+		this.user = user;
+	}
 }

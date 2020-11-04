@@ -12,10 +12,10 @@ public class MoodEntry {
 	@Id
 	@Column(name="mood_entry_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int moodEntryId;
+	private int id; 
 	
 	
-	@OneToMany(mappedBy = "moodEntry")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "entry")
 	private List<Mood> moodList = new ArrayList<Mood>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -29,6 +29,10 @@ public class MoodEntry {
 	public MoodEntry(String date, UserInfo user_info) {
 		this.date = date;
 		this.user = user_info;
+	}
+
+	public UserInfo getUser() {
+		return user;
 	}
 	
 	public void setUserInfo(UserInfo user) {

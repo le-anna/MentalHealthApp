@@ -1,12 +1,11 @@
 import React, { useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ImageBackground, Button, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from "react";
 import logo from './circleTest.png';
 
 
 export default function Home ({navigation}) {
     const [username, setUserName] = useState([]);
-    const [testName, testSetName] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:8080/user/1', {
@@ -28,17 +27,23 @@ export default function Home ({navigation}) {
                  Hello,  
                  {username}
             </Text>
-            <TextInput style={styles.text}
-                onChangeText={(val) => setUserName(val)}/>
-            <Button 
+            <TouchableOpacity 
+                style={styles.buttonStyle} 
                 title="Add Entry"
-                onPress={() => navigation.navigate('AddEntry')}
-            />
+                onPress={() => navigation.navigate('AddEntry')}>
+                     <Text>Add Entry</Text>
+            </TouchableOpacity>
             <Button 
                 title="View Statistics"
                 onPress={() => navigation.navigate('Statistics')}
             />
+             <TouchableOpacity 
+                title="View Entries"
+                onPress={() => navigation.navigate('ViewEntry')}>
+                    <Text>View Entries</Text>
+            </TouchableOpacity>
             </ImageBackground>
+            
         
         </View>
     )
@@ -47,7 +52,6 @@ export default function Home ({navigation}) {
 const styles = StyleSheet.create({
     container: { 
       flex: 1,
-      flexDirection: "column",
       alignItems: 'center',
       justifyContent: 'center', 
       backgroundColor: 'white'
@@ -62,6 +66,14 @@ const styles = StyleSheet.create({
     image: {
         width:300, 
         height:300, 
+    },
+    buttonStyle: {
+        marginLeft: 100,
+        paddingTop: 20,
+        paddingBottom: 50,
+        textAlign: 'center',
+        width: 100,
+        backgroundColor: "transparent",
     }
   });
 

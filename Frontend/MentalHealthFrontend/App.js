@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './Home'
 import AddEntry from './AddEntry'
+import ViewEntry from './ViewEntry'
 import Statistics from './Statistics'
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="AddEntry" component={AddEntry}/>
+          <Stack.Screen name="ViewEntry" component={ViewEntry}/>
           <Stack.Screen name="Statistics" component={Statistics}/>
       </Stack.Navigator>
       <StatusBar style="auto" />

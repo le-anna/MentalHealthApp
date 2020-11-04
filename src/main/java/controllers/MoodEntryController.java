@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import models.MoodEntry;
-import models.UserInfo;
 import repository.MoodEntryRepository;
 import repository.UserInfoRepository;
 import service.MoodEntryService;
-import service.UserInfoService;
 
-
+@CrossOrigin
 @RestController
 public class MoodEntryController {
 
@@ -34,7 +33,6 @@ public class MoodEntryController {
 	public List<MoodEntry> getEntries() {
 		return entry_service.getEntries();
 	}
-
 
 	@GetMapping("/user/{user_id}/entries") 
 	public List<MoodEntry> findByUserId(@PathVariable ("user_id")  int user_id) {

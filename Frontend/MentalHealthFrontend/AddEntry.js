@@ -13,6 +13,7 @@ export default function AddEntry({navigation}) {
         setDate(month + '-' + date + '-' + year);
     });
 
+
     return(
         <View style = {styles.container}>
          <Text style={styles.date}>{currDate} </Text>

@@ -13,14 +13,22 @@ import repository.MoodRepository;
 public class MoodService {
 
 	@Autowired
-	private MoodRepository mood_repo;
-	
+	private MoodRepository moodRepo;
+
 	public List<Mood> getMoods() {
-		return mood_repo.findAll();
+		return moodRepo.findAll();
+	}
+	
+	public List<Mood> findByEntryId(int entryId) {
+		return moodRepo.findByEntryId(entryId);
+	}
+
+	public List<Mood> findByUserId(int userId) {
+		return moodRepo.findByUserId(userId);
 	}
 
 	public Mood saveMood(Mood mood) {
-		return mood_repo.save(mood);
+		return moodRepo.save(mood);
 	}
 
 }

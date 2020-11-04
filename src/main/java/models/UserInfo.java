@@ -22,6 +22,9 @@ public class UserInfo {
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "user")
 	private List<MoodEntry> entry_list = new ArrayList<MoodEntry>();
 	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "user")
+	private List<Mood> moodList = new ArrayList<Mood>();
+
 	public UserInfo() {
 		
 	}
@@ -30,7 +33,7 @@ public class UserInfo {
 		this.name = name;
 	}
 	
-	public int getUserID() {
+	public int getUserId() {
 		return id;
 	}
 	
