@@ -16,7 +16,7 @@ public class MoodEntry {
 	
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "entry")
-	private List<Mood> moodList = new ArrayList<Mood>();
+	private List<Mood> moods = new ArrayList<Mood>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id", nullable=false)
@@ -33,6 +33,10 @@ public class MoodEntry {
 
 	public UserInfo getUser() {
 		return user;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 	public void setUserInfo(UserInfo user) {

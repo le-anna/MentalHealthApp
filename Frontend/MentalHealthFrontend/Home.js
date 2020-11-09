@@ -1,11 +1,12 @@
 import React, { useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, ImageBackground, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import { useState, useEffect } from "react";
 import logo from './circleTest.png';
 
 
 export default function Home ({navigation}) {
     const [username, setUserName] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:8080/user/1', {
@@ -20,11 +21,13 @@ export default function Home ({navigation}) {
         .catch((error) => console.error(error))
     }, []);
 
+    
+
     return (
         <View style={styles.container}>  
             <ImageBackground source={logo} style={styles.image}>
             <Text style={styles.text}>
-                 Hello,  
+                 Hello, {""} 
                  {username}
             </Text>
             <TouchableOpacity 
@@ -33,14 +36,21 @@ export default function Home ({navigation}) {
                 onPress={() => navigation.navigate('AddEntry')}>
                      <Text>Add Entry</Text>
             </TouchableOpacity>
-            <Button 
-                title="View Statistics"
-                onPress={() => navigation.navigate('Statistics')}
-            />
+
              <TouchableOpacity 
                 title="View Entries"
                 onPress={() => navigation.navigate('ViewEntry')}>
                     <Text>View Entries</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+                title="CalendarInfo"
+                onPress={() => navigation.navigate('CalendarInfo')}>
+                    <Text>Calendar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+                title="View Statistics"
+                onPress={() => navigation.navigate('Statistics')}>
+                    <Text>Statistics</Text>
             </TouchableOpacity>
             </ImageBackground>
             
@@ -54,10 +64,10 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center', 
-      backgroundColor: 'white'
+      backgroundColor: 'white',
     },
     text: {
-        marginTop:120,
+        marginTop: 120,
         textAlign: 'center',
         fontSize: 40,
         fontFamily: 'Avenir',

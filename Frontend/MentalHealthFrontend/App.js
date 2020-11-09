@@ -5,6 +5,7 @@ import Home from './Home'
 import AddEntry from './AddEntry'
 import ViewEntry from './ViewEntry'
 import Statistics from './Statistics'
+import CalendarInfo from './Calendar'
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Screen name="AddEntry" component={AddEntry}/>
           <Stack.Screen name="ViewEntry" component={ViewEntry}/>
           <Stack.Screen name="Statistics" component={Statistics}/>
+          <Stack.Screen name="CalendarInfo" component={CalendarInfo}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </View>

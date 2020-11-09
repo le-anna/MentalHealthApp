@@ -9,5 +9,7 @@ import java.util.*;
 @Repository
 public interface MoodRepository extends JpaRepository<Mood, Integer> {
     List<Mood> findByEntryId(int entryId);
-    List<Mood> findByUserId(int userId);
+    Mood findByEntryDate(String entryDate);
+    List<Mood> findByEntry_UserId_AndEntry_Date(int userId, String entryDate);
+    List<Mood> findByEntry_UserId(int userId);
 }

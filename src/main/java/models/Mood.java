@@ -19,11 +19,6 @@ public class Mood {
 	@JoinColumn(name="mood_entry_id", nullable=false)
 	public MoodEntry entry;
 
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id", nullable=false)
-	public UserInfo user;
-
 	public Mood() {
 	}
 
@@ -58,8 +53,5 @@ public class Mood {
 	public void setMoodEntry(MoodEntry entry){
 		this.entry = entry;
 	}
-	
-	public void setUser(UserInfo user){
-		this.user = user;
-	}
+
 }

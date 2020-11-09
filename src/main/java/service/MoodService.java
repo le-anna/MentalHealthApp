@@ -23,8 +23,16 @@ public class MoodService {
 		return moodRepo.findByEntryId(entryId);
 	}
 
-	public List<Mood> findByUserId(int userId) {
-		return moodRepo.findByUserId(userId);
+	public Mood findByEntryDate(String entryDate) {
+		return moodRepo.findByEntryDate(entryDate);
+	}
+
+	public List<Mood> findByEntry_UserId_AndEntry_Date(int userId, String entryDate) {
+		return moodRepo.findByEntry_UserId_AndEntry_Date(userId, entryDate);
+	}
+
+	public List<Mood> findByEntry_UserId(int userId) {
+		return moodRepo.findByEntry_UserId(userId);
 	}
 
 	public Mood saveMood(Mood mood) {

@@ -23,8 +23,20 @@ public class MoodEntryService {
 		return moodEntryRepo.findByUserId(user_id);
 	}
 
+	public boolean existsByDate(String date) {
+		return moodEntryRepo.existsByDate(date);
+	}
+
 	public MoodEntry saveEntry(MoodEntry entry) {
 		return moodEntryRepo.save(entry);
+	}
+
+	public MoodEntry findByUserIdAndDate(int userId, String date) {
+		return moodEntryRepo.findByUserIdAndDate(userId, date);
+	} 
+
+	public MoodEntry findByDate(String date) {
+		return moodEntryRepo.findByDate(date);
 	}
 
 }
