@@ -14,6 +14,7 @@ import models.Mood;
 import models.MoodEntry;
 import repository.MoodEntryRepository;
 import repository.MoodRepository;
+import repository.UserInfoRepository;
 import service.MoodService;
 
 @CrossOrigin
@@ -27,7 +28,10 @@ public class MoodController {
     private MoodRepository mood_repo;
 
     @Autowired 
-    private MoodEntryRepository mood_entry_repo;
+    private MoodEntryRepository entryRepo;
+
+    @Autowired 
+    private UserInfoRepository userRepo;
 
     @GetMapping("/moods") 
 	public List<Mood> getEntries() {
@@ -56,7 +60,7 @@ public class MoodController {
 
     @PostMapping("/entry/{entryId}/mood") 
 	public Mood saveMood(@PathVariable (value = "entryId") int entryId, @RequestBody Mood mood) {
-		return mood_entry_repo.findById(entryId).map(mood_entry -> {
+		return entryRepo.findById(entryId).map(mood_entry -> {
             mood.setMoodEntry(mood_entry);
             return mood_repo.save(mood);
         }).orElseThrow(RuntimeException::new);
@@ -64,12 +68,35 @@ public class MoodController {
 
     @PostMapping("user/{userId}/entry/{entryDate}/mood") 
 	public Mood saveMoodByDate(@PathVariable (value = "entryDate") String entryDate,@PathVariable (value = "userId") int userId, @RequestBody Mood mood) {
-        int tempId = mood_entry_repo.findByUserIdAndDate(userId, entryDate).getId();
-		return mood_entry_repo.findById(tempId).map(entry -> {
+        int tempId = entryRepo.findByUserIdAndDate(userId, entryDate).getId();
+		return entryRepo.findById(tempId).map(entry -> {
             mood.setMoodEntry(entry);
             return mood_repo.save(mood);
         }).orElseThrow(RuntimeException::new);
     }
 
     
+    @PostMapping("/user/{userId}/entry/{entryDate}/moods") 
+	public MoodEntry saveEntry(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate, @RequestBody List<Mood> moods) {
+        boolean checkIfExists = entryRepo.existsByUserIdAndDate(userId, entryDate);
+        if (!checkIfExists) {
+            return userRepo.findById(userId).map(user -> {
+                MoodEntry entry = new MoodEntry();
+                entry.setDate(entryDate);
+                entry.setUserInfo(user);
+                entryRepo.save(entry);
+                for(Mood temp : moods) {
+                    temp.setMoodEntry(entry);
+                    mood_repo.save(temp);
+                     }
+            	return entryRepo.save(entry);
+            	}).orElseThrow(RuntimeException::new);
+        } else {
+            for(Mood temp : moods) {
+                temp.setMoodEntry(entryRepo.findByUserIdAndDate(userId, entryDate));
+                    mood_repo.save(temp);
+                 }
+                return entryRepo.findByUserIdAndDate(userId, entryDate);
+        }
+    } 
 }

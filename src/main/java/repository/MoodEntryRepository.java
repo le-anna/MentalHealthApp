@@ -12,4 +12,5 @@ public interface MoodEntryRepository extends JpaRepository<MoodEntry, Integer> {
    MoodEntry findByUserIdAndDate(int userId, String date);
    MoodEntry findByDate(String date);
    boolean existsByDate(String date);
+   boolean existsByUserIdAndDate(int userId, String date);
 }

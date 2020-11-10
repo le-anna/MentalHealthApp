@@ -51,5 +51,8 @@ public class MoodEntry {
 		return date;
 	}
 	
+	public List<Mood> getMoods() {
+		return moods;
+	}
 }
 
