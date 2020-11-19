@@ -39,4 +39,16 @@ public class MoodService {
 		return moodRepo.save(mood);
 	}
 
+	public boolean existsByEntryDateAndName(String date, String name) {
+		return moodRepo.existsByEntryDateAndName(date, name);
+	}
+
+	public Mood findByEntryDateAndName(String date, String name) {
+		return moodRepo.findByEntryDateAndName(date, name);
+	}
+
+	public Mood findByName(String name) {
+		return moodRepo.findByName(name);
+	}
+
 }

@@ -12,4 +12,9 @@ public interface MoodRepository extends JpaRepository<Mood, Integer> {
     Mood findByEntryDate(String entryDate);
     List<Mood> findByEntry_UserId_AndEntry_Date(int userId, String entryDate);
     List<Mood> findByEntry_UserId(int userId);
+    void deleteByName(Mood mood);
+    Mood findByName(String name);
+    Mood findById(int id);
+    boolean existsByEntryDateAndName(String date, String Name); 
+    Mood findByEntryDateAndName(String date, String Name);
 }

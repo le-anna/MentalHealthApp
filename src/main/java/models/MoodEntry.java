@@ -1,12 +1,15 @@
 
 package models;
+
 import java.util.*;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name = "mood_entry")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "moods", "notes"})
 public class MoodEntry {
 	
 	@Id
@@ -14,9 +17,12 @@ public class MoodEntry {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 
 	
-	
+
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "entry")
 	private List<Mood> moods = new ArrayList<Mood>();
+
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "note")
+	private List<Note> notes = new ArrayList<Note>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id", nullable=false)
@@ -46,6 +52,7 @@ public class MoodEntry {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 
 	public String getDate() {
 		return date;

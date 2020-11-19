@@ -9,7 +9,23 @@ export default function AddEntry({navigation}) {
     const [currDate, setDate] = useState('');
     const [clicked, setClicked] = useState(false);
     const [added, setAdded] = useState(false);
-    const [submit, setSubmit] = useState('');
+    // const [list, setList] = useState(initialList);
+
+    // //when user enters first mood, update first default element of list
+    // const initialList = [
+    //     {
+    //         name: 'default',
+    //         scale: '10'
+    //     }
+    // ]
+
+    // function handleChange() {
+    //     // track input field's state
+    //   }
+     
+    //   function handleAdd() {
+    //     // add item
+    //   }
 
     useEffect(() => {
         setDate(moment().format("YYYY-MM-DD"));
@@ -46,9 +62,25 @@ export default function AddEntry({navigation}) {
         }
     }, [clicked]) 
 
+    // useEffect(() => {
+    //     if(clicked == true) {
+    //         fetch(`http://localhost:8080/user/1/entry/` + currDate + `/moods`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 Accept: 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 name: moodName,
+    //                 scale: scale
+    //             })
+    //         })
+    //     }
+    // }, [clicked]) 
+
     return(
         <View style={styles.container}>
-         <Text style={styles.date}>{currDate} </Text>
+         <Text style={styles.date}>{moment().format('MMMM Do, YYYY')} </Text>
          <View className="entryFields">
             <TextInput style = {styles.input}
                 placeholder="Enter Mood"
@@ -124,7 +156,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         width: 200,
-        backgroundColor: "#6495ED",
+        backgroundColor: "#699125",
         padding: 10,
         borderRadius: 5,
     },
@@ -136,7 +168,7 @@ const styles = StyleSheet.create({
     addElements : {
         height: 20,
         width: 20,
-        backgroundColor: "#6495ED",
+        backgroundColor: "#699125",
         textAlign: 'center',
         marginLeft: 10,
         borderRadius: 50,

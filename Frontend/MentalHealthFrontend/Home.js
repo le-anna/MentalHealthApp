@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import logo from './circleTest.png';
 
 
@@ -32,28 +33,37 @@ export default function Home ({navigation}) {
             </Text>
             <TouchableOpacity 
                 style={styles.buttonStyle} 
-                title="Add Entry"
                 onPress={() => navigation.navigate('AddEntry')}>
-                     <Text>Add Entry</Text>
-            </TouchableOpacity>
-
-             <TouchableOpacity 
-                title="View Entries"
-                onPress={() => navigation.navigate('ViewEntry')}>
-                    <Text>View Entries</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-                title="CalendarInfo"
-                onPress={() => navigation.navigate('CalendarInfo')}>
-                    <Text>Calendar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-                title="View Statistics"
-                onPress={() => navigation.navigate('Statistics')}>
-                    <Text>Statistics</Text>
+                     <Text style={styles.buttonText}>Add Entry</Text>
             </TouchableOpacity>
             </ImageBackground>
-            
+
+            <View style={styles.barContianer}>
+                <TouchableOpacity 
+                    style={styles.barButton}
+                    title="View Entries"
+                    onPress={() => navigation.navigate('ViewEntry')}>
+                         <FontAwesomeIcon icon="bars" />
+                </TouchableOpacity>
+                <TouchableOpacity 
+                     style={styles.barButton}
+                    title="CalendarInfo"
+                    onPress={() => navigation.navigate('CalendarInfo')}>
+                         <FontAwesomeIcon icon="calendar" />
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.barButton}
+                    title="View Statistics"
+                    onPress={() => navigation.navigate('Statistics')}>
+                        <FontAwesomeIcon icon="chart-bar" />
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.barButton}
+                    title="Search"
+                    >
+                        <FontAwesomeIcon icon="search" />
+                </TouchableOpacity>
+            </View>
         
         </View>
     )
@@ -79,11 +89,33 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         marginLeft: 100,
-        paddingTop: 20,
-        paddingBottom: 50,
+        paddingTop: 8,
+        paddingBottom: 8,
         textAlign: 'center',
         width: 100,
-        backgroundColor: "transparent",
+        backgroundColor: "#699125",
+        borderRadius: 5,
+        shadowColor: 'rgba(0, 0, 0, 0.1)',
+        shadowOpacity: 0.8,
+        elevation: 6,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    barContianer: {
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 20,
+    }, 
+    barButton: {
+        padding: 8,
+        borderRadius: 5,
+        marginLeft: 20,
+        marginRight: 20,
+
     }
   });
 

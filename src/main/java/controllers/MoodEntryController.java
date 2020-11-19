@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.*;
 
-import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import models.MoodEntry;
-import models.UserInfo;
 import repository.MoodEntryRepository;
 import repository.UserInfoRepository;
 import service.MoodEntryService;

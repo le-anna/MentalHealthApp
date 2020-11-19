@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import models.Mood;
 import models.MoodEntry;
@@ -43,17 +45,17 @@ public class MoodController {
 		return moodService.findByEntryId(moodEntryId);
     }
 
-    @GetMapping("{entryDate}/moods")
-    public Mood findByEntryDate(@PathVariable (value = "entryDate") String entryDate) {
-        return moodService.findByEntryDate(entryDate);
-    }
+    // @GetMapping("{entryDate}/moods")
+    // public Mood findByEntryDate(@PathVariable (value = "entryDate") String entryDate) {
+    //     return moodService.findByEntryDate(entryDate);
+    // }
 
     @GetMapping("{entryDate}/user/{userId}/moods")
     public List<Mood> findByEntry_UserId_AndEntry_Date(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate) {
         return moodService.findByEntry_UserId_AndEntry_Date(userId, entryDate);
     }
 
-    @GetMapping("testingUser/{userId}") 
+    @GetMapping("user/{userId}/moods") 
     public List<Mood> findByEntry_UserId(@PathVariable (value = "userId") int userId) {
         return moodService.findByEntry_UserId(userId);
     }
@@ -99,4 +101,26 @@ public class MoodController {
                 return entryRepo.findByUserIdAndDate(userId, entryDate);
         }
     } 
+
+    @DeleteMapping("deleteMood/{entryDate}/{name}")
+    public void deleteMood ( @PathVariable (value = "entryDate") String entryDate, @PathVariable (value = "name") String name) {
+        if (moodService.existsByEntryDateAndName(entryDate, name)) {
+            mood_repo.deleteById(moodService.findByEntryDateAndName(entryDate, name).getId());
+        }
+    }
+
+    @DeleteMapping("deleteMood/{id}")
+    public void testDelete (@PathVariable (value = "id") int id) {
+            mood_repo.deleteById(id);
+    }
+
+    @GetMapping("findMood/{date}/{name}")
+    public boolean existsByEntryDateAndName (@PathVariable (value = "date") String date, @PathVariable (value = "name") String name) {
+        return moodService.existsByEntryDateAndName(date, name);
+    }
+
+    @GetMapping("checkFindMood/{name}")
+    public Mood findMood (@PathVariable (value = "name") String name) {
+        return mood_repo.findByName(name);
+    }
 }

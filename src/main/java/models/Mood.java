@@ -26,6 +26,10 @@ public class Mood {
 		this.name = name;
 		this.scale = scale;
 	}
+
+	public int getId() {
+		return id;
+	}
 	
 	public String getName() {
 		return name;

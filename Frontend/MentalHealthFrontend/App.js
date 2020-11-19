@@ -10,16 +10,49 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus} from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus)
+
 const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>{
       <View style={styles.container}>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="AddEntry" component={AddEntry}/>
-          <Stack.Screen name="ViewEntry" component={ViewEntry}/>
-          <Stack.Screen name="Statistics" component={Statistics}/>
+          <Stack.Screen 
+            name="Home"
+            component={Home}
+            options={{ 
+              title: 'Home', 
+              headerTintColor: 'black',
+              headerStyle: {
+                backgroundColor: '#699125'
+              }}}/>
+          <Stack.Screen 
+            name="AddEntry" 
+            component={AddEntry} 
+            options={{ 
+              title: 'Add Entry', 
+              headerTintColor: 'black',
+              headerStyle: {
+                backgroundColor: '#699125'
+              }}}/>
+          <Stack.Screen 
+            name="ViewEntry" 
+            options={{ title: 'View Entry' }}
+            component={ViewEntry}
+            options={{ 
+              title: 'View Entry', 
+              headerTintColor: 'black',
+              headerStyle: {
+                backgroundColor: '#699125'
+              }}}/>
+          <Stack.Screen 
+            name="Statistics" 
+              component={Statistics}/>
           <Stack.Screen name="CalendarInfo" component={CalendarInfo}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
