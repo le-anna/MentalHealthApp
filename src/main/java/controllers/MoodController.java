@@ -36,7 +36,7 @@ public class MoodController {
     private UserInfoRepository userRepo;
 
     @GetMapping("/moods") 
-	public List<Mood> getEntries() {
+	public List<Mood> getMoods() {
 		return moodService.getMoods();
 	}
 	
@@ -50,14 +50,24 @@ public class MoodController {
     //     return moodService.findByEntryDate(entryDate);
     // }
 
-    @GetMapping("{entryDate}/user/{userId}/moods")
-    public List<Mood> findByEntry_UserId_AndEntry_Date(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate) {
-        return moodService.findByEntry_UserId_AndEntry_Date(userId, entryDate);
-    }
+    // @GetMapping("{entryDate}/user/{userId}/moods")
+    // public List<Mood> findByEntry_UserId_AndEntry_Date(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate) {
+    //     return moodService.findByEntry_UserId_AndEntry_Date(userId, entryDate);
+    // }
 
     @GetMapping("user/{userId}/moods") 
     public List<Mood> findByEntry_UserId(@PathVariable (value = "userId") int userId) {
         return moodService.findByEntry_UserId(userId);
+    }
+
+    @GetMapping("user/{userId}/moods/filter") 
+    public Set<String> getMoodsForDropdown () {
+        List<Mood> allMoods = moodService.getMoods();
+        Set<String> set = new HashSet<>();
+        for (Mood item : allMoods) {
+            set.add(item.getName());
+        }
+        return set;
     }
 
     @PostMapping("/entry/{entryId}/mood") 
@@ -76,7 +86,6 @@ public class MoodController {
             return mood_repo.save(mood);
         }).orElseThrow(RuntimeException::new);
     }
-
     
     @PostMapping("/user/{userId}/entry/{entryDate}/moods") 
 	public MoodEntry saveEntry(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate, @RequestBody List<Mood> moods) {
@@ -119,8 +128,4 @@ public class MoodController {
         return moodService.existsByEntryDateAndName(date, name);
     }
 
-    @GetMapping("checkFindMood/{name}")
-    public Mood findMood (@PathVariable (value = "name") String name) {
-        return mood_repo.findByName(name);
-    }
 }

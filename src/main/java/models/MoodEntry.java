@@ -16,12 +16,11 @@ public class MoodEntry {
 	@Column(name="mood_entry_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 
-	
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "entry")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "entry", cascade=CascadeType.PERSIST)
 	private List<Mood> moods = new ArrayList<Mood>();
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "note")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "note", cascade=CascadeType.PERSIST)
 	private List<Note> notes = new ArrayList<Note>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -60,6 +59,10 @@ public class MoodEntry {
 	
 	public List<Mood> getMoods() {
 		return moods;
+	}
+
+	public List<Note> getNotes() {
+		return notes;
 	}
 }
 

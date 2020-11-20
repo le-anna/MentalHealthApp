@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Button, TouchableOpacity} from 'react-native';
+import { Alert, StyleSheet, Text, View, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import logo from './circleTest.png';
@@ -21,8 +21,6 @@ export default function Home ({navigation}) {
         .then((json) => setUserName(json.name))
         .catch((error) => console.error(error))
     }, []);
-
-    
 
     return (
         <View style={styles.container}>  
@@ -59,8 +57,7 @@ export default function Home ({navigation}) {
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.barButton}
-                    title="Search"
-                    >
+                    title="Search">
                         <FontAwesomeIcon icon="search" />
                 </TouchableOpacity>
             </View>

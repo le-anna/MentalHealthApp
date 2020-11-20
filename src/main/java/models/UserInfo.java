@@ -19,7 +19,7 @@ public class UserInfo {
 	private String name;
 	
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "user", cascade= CascadeType.ALL)
 	private List<MoodEntry> entries = new ArrayList<MoodEntry>();
 
 	public UserInfo() {

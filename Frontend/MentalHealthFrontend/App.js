@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { RefreshControl, StyleSheet, Text, View } from 'react-native';
 import Home from './Home'
 import AddEntry from './AddEntry'
 import ViewEntry from './ViewEntry'
@@ -12,9 +12,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync} from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus)
+library.add(fab, faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync)
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -29,7 +29,7 @@ export default function App() {
               title: 'Home', 
               headerTintColor: 'black',
               headerStyle: {
-                backgroundColor: '#699125'
+              backgroundColor: '#699125'
               }}}/>
           <Stack.Screen 
             name="AddEntry" 

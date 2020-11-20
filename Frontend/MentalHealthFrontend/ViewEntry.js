@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useReducer} from 'react';
 import { View, StyleSheet, TextInput, Text, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 // import DatePicker from 'react-native-datepicker'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import moment from 'moment';
@@ -9,32 +9,22 @@ import { render } from 'react-dom';
 
 export default function ViewEntry ({navigation}) {
     const [data, setData] = useState([]);
+    const [noteData, setNote] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
     const [isDate, setIsDate] = useState(false);
     const [test, setTest] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [isNoteLoading, setNoteIsLoading] = useState(true);
     const [url, setUrl] = useState('http://localhost:8080/user/1')
+    const [noteUrl, setNoteUrl] = useState('http://localhost:8080/user/1')
     const [isDelete, setIsDelete] = useState(false);
     const [deleteItem, setDeleteItem] = useState('');
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const result = await fetch(`http://localhost:8080/${submit}` + `/user/1/moods`, {
-    //         method: 'GET',
-    //         headers: {
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //         }
-    //     })
-    //     .then((response) => response.json())
-    //     .then((json) => setData(json))
-    //     .catch((error) => console.error(error))
-    //     }  
-    // }, [submit]);
 
     useEffect(() => {
         const fetchData = async() => {
-            const result = await fetch(url).then((response) => response.json())
+            const result = await fetch(url)
+            .then((response) => response.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setIsLoading(false));
@@ -42,6 +32,17 @@ export default function ViewEntry ({navigation}) {
         };
         fetchData();
     }, [url]);
+
+    useEffect(() => {
+        const fetchData = async() => {
+            const noteResult = await fetch(noteUrl)
+            .then((res) => res.json())
+            .then((json) => setNote(json))
+            .catch((error) => console.error(error))
+            .finally(() => setNoteIsLoading(false));
+        };
+        fetchData();
+    }, [noteUrl]);
 
     useEffect(() => {
         if(isDelete) {
@@ -52,24 +53,24 @@ export default function ViewEntry ({navigation}) {
                     'Content-Type': 'application/json',
                 }
             })
-            setIsDelete(false);
+           setIsDelete(false);
         }
     }, [deleteItem]); 
 
-    useEffect(() => {
-        if(isDate) {
-            const date = moment(startDate).format('YYYY-MM-DD');
-            fetch(`http://localhost:8080/${date}` + `/user/1/moods`, {
-                method: 'GET',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                }
-            });
-            setUrl(`http://localhost:8080/${date}` + `/user/1/moods`);
-            setIsDate(false);
-        }
-    }, [startDate]); 
+    // useEffect(() => {
+    //     if(isDate) {
+    //         const date = moment(startDate).format('YYYY-MM-DD');
+    //         fetch(`http://localhost:8080/${date}` + `/user/1/moods`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 Accept: 'application/json',
+    //                 'Content-Type': 'application/json',
+    //             }
+    //         });
+    //         setUrl(`http://localhost:8080/${date}` + `/user/1/moods`);
+    //        setIsDate(false);
+    //     }
+    // }, [startDate]); 
 
     // function handleClick(date) {
     //     setStartDate(date);
@@ -98,12 +99,18 @@ export default function ViewEntry ({navigation}) {
                 <View style={styles.buttonContainer}>   
                     <TouchableOpacity 
                         style={styles.buttonStyle}
-                        onPress={() => setUrl(`http://localhost:8080/${test}` + `/user/1/moods`)}>
+                        onPress={() => {
+                            setUrl(`http://localhost:8080/${test}` + `/user/1/moods`);
+                            setNoteUrl(`http://localhost:8080/user/1/${test}` + `/notes`)}}>
                             <Text style={styles.buttonText}>Submit</Text>
                     </TouchableOpacity>
+            
                 </View>
+              
+               
+       
 
-                <View className="calendar"
+                {/* <View className="calendar"
                     style={styles.calendar}>
                     <Text style={styles.textStyle}>Choose Date to View: {""}</Text>
                     <DatePicker 
@@ -114,37 +121,61 @@ export default function ViewEntry ({navigation}) {
                             setStartDate(date);
                             setIsDate(true);
                             const myDate = moment(startDate).format('YYYY-MM-DD');
-                            setUrl(`http://localhost:8080/${myDate}` + `/user/1/moods`)}}/>
-                </View>
+                            setUrl(`http://localhost:8080/${myDate}` + `/user/1/moods`)
+                        }
+                        }/>
+                </View> */}
+
+                    <TouchableOpacity style={styles.reloadIcon}
+                        onPress={() => {
+                            setUrl(`http://localhost:8080/${test}` + `/user/1/moods`);
+                        }}> 
+                        <FontAwesomeIcon icon="sync" /> 
+                    </TouchableOpacity>
                 
-                <View className="entries"
-                    style={styles.entries}>
+                <View className="entries" style={styles.entries}>
                     {isLoading ? <ActivityIndicator/> : (
                         <FlatList
                             data={data}
                             renderItem={({ item }) => (
-                                <View 
-                                    style={styles.entriesContainer}
+                                <View style={styles.entriesContainer}
                                     keyExtractor={item => item.id.toString()}
                                     >
                                         <Text style={styles.textStyle}> 
                                             {item.name} {": "}
                                             {item.scale} </Text>
-                               
-                                            <TouchableOpacity
-                                             style={styles.trashIcon}
+                                            <TouchableOpacity style={styles.trashIcon}
                                                 onPress={() => {
                                                     setDeleteItem(item.id);
                                                     setIsDelete(true);
-                                                    const myDate = moment(startDate).format('YYYY-MM-DD');
-                                                    setUrl(`http://localhost:8080/${myDate}` + `/user/1/moods`)
+                                                    setUrl(`http://localhost:8080/user/1`);
                                                 }}>
                                                 <FontAwesomeIcon icon="trash" />
                                             </TouchableOpacity>
-                            
-                                  
                                 </View>
-
+                            )}
+                        />
+                    )}
+                </View>
+                <View className="notes" style={styles.noteContainer}>
+                        {isLoading ? <ActivityIndicator/> : (
+                        <FlatList
+                            data={noteData}
+                            renderItem={({ item }) => (
+                                <View style={styles.note}
+                                    keyExtractor={item => item.id.toString()}>
+                                        <Text style={styles.textStyle}> 
+                                            {item.note} </Text>
+                                            <TouchableOpacity style={styles.trashIcon}
+                                                // onPress={() => {
+                                                //     setDeleteItem(item.id);
+                                                //     setIsDelete(true);
+                                                //     setUrl(`http://localhost:8080/user/1`);
+                                                // }}
+                                                >
+                                                <FontAwesomeIcon icon="trash" />
+                                            </TouchableOpacity>
+                                </View>
                             )}
                         />
                     )}
@@ -164,9 +195,8 @@ const styles = StyleSheet.create({
       fontFamily: 'Avenir'
     },
     searchContainer : {
-        alignItems: 'left',
-        justifyContent: 'left',
-        paddingLeft: 10,
+        alignItems: 'center',
+        justifyContent: 'center', 
     },
     buttonContainer : {
         alignItems: 'center',
@@ -185,7 +215,7 @@ const styles = StyleSheet.create({
         height: 45,
         backgroundColor: '#F5F5F5',
         borderRadius: 5,
-        color: 'grey',
+        color: 'black',
         paddingLeft: 5,
     },
     title : {
@@ -202,27 +232,44 @@ const styles = StyleSheet.create({
         backgroundColor: "#699125",
         padding: 10,
         borderRadius: 5,
-
     },
     buttonText: {
         color: 'white',
         fontWeight: 'bold',
         padding: 0,
     },
-    entries: {
-        paddingTop: 15,
-        paddingLeft: 10,
-        fontsize: 18
-    }, 
     trashIcon: {
         alignSelf: 'flex-end',
         paddingBottom: 12,
-        
     },
     entriesContainer: {
         flexDirection: "row",
         justifyContent: 'space-between',
         display: 'flex',
         paddingBottom: 10,
+        padding: 16,
+        borderColor: '#bbb',
+        borderWidth: 1,
+        borderStyle: 'dashed',
+        borderRadius: 5
+    },
+    noteContainer: {
+        paddingTop: 20,
+    },
+    note: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        display: 'flex',
+        paddingBottom: 10,
+        padding: 16,
+        borderColor: '#bbb',
+        borderWidth: 1,
+        borderStyle: 'dashed',
+        borderRadius: 5
+    },
+    reloadIcon : {
+        alignSelf: 'flex-end',
+        paddingRight: 5,
+        paddingBottom: 20,
     }
 });
