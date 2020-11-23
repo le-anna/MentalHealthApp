@@ -22,4 +22,8 @@ public class NoteService {
 	public List<Note> findByEntry_UserId_AndEntry_Date(int userId, String entryDate) {
 		return noteRepo.findByEntry_UserId_AndEntry_Date(userId, entryDate);
 	}
+
+	public List<Note> findByNoteIgnoreCaseContaining(String word) {
+		return noteRepo.findByNoteIgnoreCaseContaining(word);
+	}
 }

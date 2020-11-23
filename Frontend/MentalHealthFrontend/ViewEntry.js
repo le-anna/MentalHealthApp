@@ -10,15 +10,15 @@ import { render } from 'react-dom';
 export default function ViewEntry ({navigation}) {
     const [data, setData] = useState([]);
     const [noteData, setNote] = useState([]);
-    const [startDate, setStartDate] = useState(new Date());
-    const [isDate, setIsDate] = useState(false);
     const [test, setTest] = useState('');
     const [isLoading, setIsLoading] = useState(true);
     const [isNoteLoading, setNoteIsLoading] = useState(true);
     const [url, setUrl] = useState('http://localhost:8080/user/1')
     const [noteUrl, setNoteUrl] = useState('http://localhost:8080/user/1')
-    const [isDelete, setIsDelete] = useState(false);
-    const [deleteItem, setDeleteItem] = useState('');
+    const [isMoodDelete, setIsMoodDelete] = useState(false);
+    const [deleteMood, setDeleteMood] = useState('');
+    const [isNoteDelete, setIsNoteDelete] = useState(false);
+    const [deleteNote, setDeleteNote] = useState('');
 
 
     useEffect(() => {
@@ -28,7 +28,6 @@ export default function ViewEntry ({navigation}) {
             .then((json) => setData(json))
             .catch((error) => console.error(error))
             .finally(() => setIsLoading(false));
-            //setData(result);
         };
         fetchData();
     }, [url]);
@@ -45,32 +44,31 @@ export default function ViewEntry ({navigation}) {
     }, [noteUrl]);
 
     useEffect(() => {
-        if(isDelete) {
-            fetch(`http://localhost:8080/deleteMood/${deleteItem}`, {
+        if(isMoodDelete) {
+            fetch(`http://localhost:8080/deleteMood/${deleteMood}`, {
                 method: 'DELETE',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 }
             })
-           setIsDelete(false);
+           setIsMoodDelete(false);
         }
-    }, [deleteItem]); 
+    }, [deleteMood]); 
 
-    // useEffect(() => {
-    //     if(isDate) {
-    //         const date = moment(startDate).format('YYYY-MM-DD');
-    //         fetch(`http://localhost:8080/${date}` + `/user/1/moods`, {
-    //             method: 'GET',
-    //             headers: {
-    //                 Accept: 'application/json',
-    //                 'Content-Type': 'application/json',
-    //             }
-    //         });
-    //         setUrl(`http://localhost:8080/${date}` + `/user/1/moods`);
-    //        setIsDate(false);
-    //     }
-    // }, [startDate]); 
+    useEffect(() => {
+        if(isNoteDelete) {
+            fetch(`http://localhost:8080/deleteNote/${deleteNote}`, {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+           setIsNoteDelete(false);
+        }
+    }, [deleteNote]); 
+
 
     // function handleClick(date) {
     //     setStartDate(date);
@@ -106,25 +104,7 @@ export default function ViewEntry ({navigation}) {
                     </TouchableOpacity>
             
                 </View>
-              
-               
-       
 
-                {/* <View className="calendar"
-                    style={styles.calendar}>
-                    <Text style={styles.textStyle}>Choose Date to View: {""}</Text>
-                    <DatePicker 
-                        dateFormat="yyyy-MM-dd"
-                        selected={startDate} 
-                        maxDate={new Date()}
-                        onChange={date => {
-                            setStartDate(date);
-                            setIsDate(true);
-                            const myDate = moment(startDate).format('YYYY-MM-DD');
-                            setUrl(`http://localhost:8080/${myDate}` + `/user/1/moods`)
-                        }
-                        }/>
-                </View> */}
 
                     <TouchableOpacity style={styles.reloadIcon}
                         onPress={() => {
@@ -133,48 +113,41 @@ export default function ViewEntry ({navigation}) {
                         <FontAwesomeIcon icon="sync" /> 
                     </TouchableOpacity>
                 
-                <View className="entries" style={styles.entries}>
+                <View className="entries">
                     {isLoading ? <ActivityIndicator/> : (
-                        <FlatList
-                            data={data}
+                        <FlatList data={data}
                             renderItem={({ item }) => (
                                 <View style={styles.entriesContainer}
-                                    keyExtractor={item => item.id.toString()}
-                                    >
-                                        <Text style={styles.textStyle}> 
-                                            {item.name} {": "}
-                                            {item.scale} </Text>
-                                            <TouchableOpacity style={styles.trashIcon}
-                                                onPress={() => {
-                                                    setDeleteItem(item.id);
-                                                    setIsDelete(true);
-                                                    setUrl(`http://localhost:8080/user/1`);
-                                                }}>
-                                                <FontAwesomeIcon icon="trash" />
-                                            </TouchableOpacity>
+                                        keyExtractor={item => item.id.toString()}>
+                                    <Text style={styles.textStyle}> 
+                                        {item.name} {": "} {item.scale} </Text>
+                                         <TouchableOpacity style={styles.trashIcon}
+                                            onPress={() => {
+                                                setDeleteMood(item.id);
+                                                setIsMoodDelete(true);
+                                                setUrl(`http://localhost:8080/user/1`);}}>
+                                            <FontAwesomeIcon icon="trash" />
+                                        </TouchableOpacity>
                                 </View>
                             )}
                         />
                     )}
                 </View>
                 <View className="notes" style={styles.noteContainer}>
-                        {isLoading ? <ActivityIndicator/> : (
-                        <FlatList
-                            data={noteData}
+                        {isNoteLoading ? <ActivityIndicator/> : (
+                        <FlatList data={noteData}
                             renderItem={({ item }) => (
-                                <View style={styles.note}
-                                    keyExtractor={item => item.id.toString()}>
-                                        <Text style={styles.textStyle}> 
-                                            {item.note} </Text>
-                                            <TouchableOpacity style={styles.trashIcon}
-                                                // onPress={() => {
-                                                //     setDeleteItem(item.id);
-                                                //     setIsDelete(true);
-                                                //     setUrl(`http://localhost:8080/user/1`);
-                                                // }}
-                                                >
-                                                <FontAwesomeIcon icon="trash" />
-                                            </TouchableOpacity>
+                            <View style={styles.note}
+                                keyExtractor={item => item.id.toString()}>
+                                    <Text style={styles.textStyle}> {item.note}</Text>
+                                        <TouchableOpacity style={styles.trashIcon}
+                                             onPress={() => {
+                                                setDeleteNote(item.id);
+                                                setIsNoteDelete(true);
+                                                setUrl(`http://localhost:8080/user/1`);
+                                            }} >
+                                            <FontAwesomeIcon icon="trash" />
+                                        </TouchableOpacity>
                                 </View>
                             )}
                         />
@@ -198,13 +171,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center', 
     },
-    buttonContainer : {
-        alignItems: 'center',
-        justifyContent: 'center', 
-        textAlign: 'center',
-        paddingTop: 15,
-        paddingBottom: 20,
-    },
     textStyle: {
         fontSize: 18,
         paddingBottom: 10,
@@ -222,6 +188,13 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center',
         fontWeight: 'bold'
+    },
+    buttonContainer : {
+        alignItems: 'center',
+        justifyContent: 'center', 
+        textAlign: 'center',
+        paddingTop: 15,
+        paddingBottom: 20,
     },
     buttonStyle: {
         alignItems: 'center',
@@ -246,15 +219,19 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-between',
         display: 'flex',
-        paddingBottom: 10,
-        padding: 16,
-        borderColor: '#bbb',
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingBottom: 5,
+        paddingTop: 14,
+        borderColor: '#bbb',    
         borderWidth: 1,
         borderStyle: 'dashed',
-        borderRadius: 5
+        borderRadius: 5,
+        marginBottom: 4,
     },
     noteContainer: {
         paddingTop: 20,
+        marginBottom: 4,
     },
     note: {
         flexDirection: "row",

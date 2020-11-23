@@ -5,16 +5,16 @@ import Home from './Home'
 import AddEntry from './AddEntry'
 import ViewEntry from './ViewEntry'
 import Statistics from './Statistics'
-import CalendarInfo from './Calendar'
+import Search from './Search'
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync, faCaretDown} from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync)
+library.add(fab, faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync, faCaretDown)
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -38,7 +38,7 @@ export default function App() {
               title: 'Add Entry', 
               headerTintColor: 'black',
               headerStyle: {
-                backgroundColor: '#699125'
+              backgroundColor: '#699125',
               }}}/>
           <Stack.Screen 
             name="ViewEntry" 
@@ -48,12 +48,26 @@ export default function App() {
               title: 'View Entry', 
               headerTintColor: 'black',
               headerStyle: {
-                backgroundColor: '#699125'
+              backgroundColor: '#699125'
               }}}/>
           <Stack.Screen 
             name="Statistics" 
-              component={Statistics}/>
-          <Stack.Screen name="CalendarInfo" component={CalendarInfo}/>
+              component={Statistics}
+              options={{ 
+                title: 'Statistics', 
+                headerTintColor: 'black',
+                headerStyle: {
+                backgroundColor: '#699125',
+                }}}/>
+          <Stack.Screen 
+            name="Search" 
+            component={Search}
+            options={{ 
+              title: 'Search', 
+              headerTintColor: 'black',
+              headerStyle: {
+              backgroundColor: '#699125',
+              }}}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </View>

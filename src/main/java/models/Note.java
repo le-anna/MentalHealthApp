@@ -17,6 +17,10 @@ public class Note {
 	@JoinColumn(name="mood_entry_id", nullable=false)
 	public MoodEntry entry;
 
+	public int getId() {
+		return id;
+	}
+
 	public String getNote() {
 		return note;
 	}

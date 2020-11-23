@@ -50,10 +50,10 @@ public class MoodController {
     //     return moodService.findByEntryDate(entryDate);
     // }
 
-    // @GetMapping("{entryDate}/user/{userId}/moods")
-    // public List<Mood> findByEntry_UserId_AndEntry_Date(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate) {
-    //     return moodService.findByEntry_UserId_AndEntry_Date(userId, entryDate);
-    // }
+    @GetMapping("{entryDate}/user/{userId}/moods")
+    public List<Mood> findByEntry_UserId_AndEntry_Date(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate) {
+        return moodService.findByEntry_UserId_AndEntry_Date(userId, entryDate);
+    }
 
     @GetMapping("user/{userId}/moods") 
     public List<Mood> findByEntry_UserId(@PathVariable (value = "userId") int userId) {
@@ -119,7 +119,7 @@ public class MoodController {
     }
 
     @DeleteMapping("deleteMood/{id}")
-    public void testDelete (@PathVariable (value = "id") int id) {
+    public void deleteNote (@PathVariable (value = "id") int id) {
             mood_repo.deleteById(id);
     }
 

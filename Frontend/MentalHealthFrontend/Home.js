@@ -57,7 +57,8 @@ export default function Home ({navigation}) {
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.barButton}
-                    title="Search">
+                    title="Search"
+                    onPress={() => navigation.navigate('Search')}>
                         <FontAwesomeIcon icon="search" />
                 </TouchableOpacity>
             </View>
