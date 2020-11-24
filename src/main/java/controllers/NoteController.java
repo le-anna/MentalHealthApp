@@ -59,8 +59,8 @@ public class NoteController {
             noteRepo.deleteById(id);
     }
 
-    @GetMapping("/searchNotes/{word}")
-    public List<Note> findByNoteContaining(@PathVariable (value = "word") String word) {
-        return noteService.findByNoteIgnoreCaseContaining(word);
+    @GetMapping("user/{userId}/search/notes/{word}")
+    public List<Note> findByNoteContaining(@PathVariable (value = "userId") int userId, @PathVariable (value = "word") String word) {
+        return noteService.findByEntry_UserId_AndNote_IgnoreCaseContaining(userId, word);
     }
 }

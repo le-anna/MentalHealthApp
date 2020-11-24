@@ -26,7 +26,7 @@ export default function CalendarInfo ({navigation}) {
   useEffect(() => {
     if (characterCount > 0) {
       const timeout = setTimeout(() => { 
-        setUrl(`http://localhost:8080/searchNotes/${search}`);
+        setUrl(`http://localhost:8080/user/1/search/notes/${search}`);
 
       }, 100)
       return () => clearTimeout(timeout)
@@ -37,7 +37,7 @@ export default function CalendarInfo ({navigation}) {
 
   return (
    <View style={styles.container}>
-      <Text style={styles.title}>Search{"\n"}</Text>
+      <Text style={styles.title}>Search Notes{"\n"}</Text>
         <View className="search" style={styles.searchContainer}>
             <TextInput style={styles.inputStyle}
               placeholder={"Enter a keyword"}

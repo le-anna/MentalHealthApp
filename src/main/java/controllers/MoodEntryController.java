@@ -53,9 +53,14 @@ public class MoodEntryController {
 		return entry_service.findByUserIdAndDate(userId, date);
 	}
 
-	@GetMapping("entry/{date}") 
-	public MoodEntry findByDate(@PathVariable ("date") String date) {
-		return entry_service.findByDate(date);
+	// @GetMapping("entry/{date}") 
+	// public MoodEntry findByDate(@PathVariable ("date") String date) {
+	// 	return entry_service.findByDate(date);
+	// }
+
+	@GetMapping("user/{userId}/entries/filter") 
+    public TreeSet<String> getDatesForDropDown () {
+		return entry_service.getDatesForDropDown();
 	}
 
 	@PostMapping("/user/{user_id}/entry") 

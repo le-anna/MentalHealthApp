@@ -68,16 +68,6 @@ export default function ViewEntry ({navigation}) {
            setIsNoteDelete(false);
         }
     }, [deleteNote]); 
-
-
-    // function handleClick(date) {
-    //     setStartDate(date);
-    //     setDatePath(moment(startDate).format('yyyy-MM-DD'));
-    //     console.log('Hello');
-    //     console.log(datePath);
-    // }
-
-    //onChange={date => setStartDate(date)}
     
         return (
             <View 

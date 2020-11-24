@@ -106,7 +106,7 @@ export default function AddEntry({navigation}) {
                 <Picker style={styles.dropdown} 
                     onValueChange={(itemValue, itemIndex) => {
                         setScaleSelect(scaleArray[itemValue]) }}>
-                    <Picker.Item label='Select number' value='0' />      
+                    <Picker.Item label='Select scale' value='0' />      
                     {Object.keys(scaleArray).map((key) => {
                     return (
                         <Picker.Item label={scaleArray[key]} value={key} key={key}/>) 
@@ -132,7 +132,7 @@ export default function AddEntry({navigation}) {
                 <Picker style={styles.dropdown} 
                     onValueChange={(itemValue, itemIndex) => {
                     setScaleInput(scaleArray[itemValue]) }}>
-                    <Picker.Item label='Select number' value='0' />      
+                    <Picker.Item label='Select scale' value='0' />      
                     {Object.keys(scaleArray).map((key) => {
                         return (
                             <Picker.Item label={scaleArray[key]} value={key} key={key}/>) 

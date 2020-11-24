@@ -70,6 +70,16 @@ public class MoodController {
         return set;
     }
 
+    @GetMapping("user/{userId}/search/date/{startDate}/{endDate}") 
+    public List<Mood> findByDateBetween(@PathVariable (value = "userId") int userId, @PathVariable (value = "startDate") String startDate, @PathVariable (value = "endDate") String endDate) {
+        return moodService.findByEntry_UserId_AndEntry_DateBetween(userId, startDate, endDate);
+    }
+
+    @GetMapping("user/{userId}/search/{moodName}/{startDate}/{endDate}") 
+    public List<Mood> findByNameAndDateBetween(@PathVariable (value = "moodName") String moodName, @PathVariable (value = "userId") int userId, @PathVariable (value = "startDate") String startDate, @PathVariable (value = "endDate") String endDate) {
+        return moodService.findByName_AndEntry_UserId_AndEntry_DateBetween(moodName, userId, startDate, endDate);
+    }
+
     @PostMapping("/entry/{entryId}/mood") 
 	public Mood saveMood(@PathVariable (value = "entryId") int entryId, @RequestBody Mood mood) {
 		return entryRepo.findById(entryId).map(mood_entry -> {

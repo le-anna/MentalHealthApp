@@ -51,4 +51,12 @@ public class MoodService {
 		return moodRepo.findByName(name);
 	}
 
+	public List<Mood> findByEntry_UserId_AndEntry_DateBetween(int userId, String startDate, String endDate) {
+		return moodRepo.findByEntry_UserId_AndEntry_DateBetween(userId, startDate, endDate);
+	}
+
+	public List<Mood> findByName_AndEntry_UserId_AndEntry_DateBetween(String name, int userId, String startDate, String endDate) {
+		return moodRepo.findByName_AndEntry_UserId_AndEntry_DateBetween(name, userId, startDate, endDate);
+	}
+
 }

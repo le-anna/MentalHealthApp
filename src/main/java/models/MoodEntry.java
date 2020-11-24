@@ -17,11 +17,11 @@ public class MoodEntry {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "entry", cascade=CascadeType.PERSIST)
-	private List<Mood> moods = new ArrayList<Mood>();
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "entry", cascade=CascadeType.PERSIST)
+	private Set<Mood> moods = new HashSet<Mood>();
 
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "note", cascade=CascadeType.PERSIST)
-	private List<Note> notes = new ArrayList<Note>();
+	@OneToMany(fetch=FetchType.EAGER, mappedBy = "note", cascade=CascadeType.PERSIST)
+	private Set<Note> notes = new HashSet<Note>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id", nullable=false)
@@ -52,16 +52,15 @@ public class MoodEntry {
 		this.date = date;
 	}
 
-
 	public String getDate() {
 		return date;
 	}
 	
-	public List<Mood> getMoods() {
+	public Set<Mood> getMoods() {
 		return moods;
 	}
 
-	public List<Note> getNotes() {
+	public Set<Note> getNotes() {
 		return notes;
 	}
 }

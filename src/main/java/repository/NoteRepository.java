@@ -10,5 +10,5 @@ import models.Note;
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Integer> {
     List<Note> findByEntry_UserId_AndEntry_Date(int userId, String entryDate);
-    List<Note> findByNoteIgnoreCaseContaining(String word);
+    List<Note> findByEntry_UserId_AndNote_IgnoreCaseContaining(int userId, String entryDate);
 }
