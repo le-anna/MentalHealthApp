@@ -6,10 +6,11 @@ import AddEntry from './AddEntry'
 import ViewEntry from './ViewEntry'
 import Statistics from './Statistics'
 import Search from './Search'
+import MoodSelection from './components/MoodSelection'
+import SearchDetail from './components/SearchDetail'
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync, faCaretDown} from '@fortawesome/free-solid-svg-icons'
@@ -68,6 +69,14 @@ export default function App() {
               headerStyle: {
               backgroundColor: '#699125',
               }}}/>
+            <Stack.Screen 
+              name="Mood Selection" 
+              component={MoodSelection}
+            />
+           <Stack.Screen 
+              name="SearchDetail" 
+              component={SearchDetail}
+            />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </View>

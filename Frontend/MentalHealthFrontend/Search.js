@@ -4,7 +4,6 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity, ActivityIndicator,
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function CalendarInfo ({navigation}) {
-
   const [search, setSearch] = useState("");
   const [url, setUrl] = useState(`http://localhost:8080/user/1`);
   const [results, setResults] = useState([]);
@@ -22,6 +21,7 @@ export default function CalendarInfo ({navigation}) {
     };
     fetchData();
 }, [url]);
+
 
   useEffect(() => {
     if (characterCount > 0) {
@@ -52,10 +52,12 @@ export default function CalendarInfo ({navigation}) {
             {isLoading ? <ActivityIndicator/> : (
                <FlatList data={results}
                   renderItem={({ item }) => (
-                  <View style={styles.entriesContainer}
-                    keyExtractor={item => item.id.toString()}>
-                    <Text style={styles.textStyle}> {item.note} </Text>
-                  </View>
+                  <TouchableOpacity style={styles.entriesContainer}
+                    keyExtractor={item => item.id.toString()}
+                    onPress={() => navigation.navigate('SearchDetail', item.entry)}>
+                    <Text style={styles.textStyle}>{item.note}{"\n"}</Text>
+                    <Text style={styles.noteDate}>{item.entry.date}</Text>
+                  </TouchableOpacity>
                 )}/>
               )}
           </View>
@@ -111,5 +113,10 @@ textStyle: {
   fontSize: 18,
   paddingBottom: 10,
 },
+noteDate: {
+  fontSize: 14,
+  color: 'grey',
+  padding: 5,
+}
   });
    

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { ScrollView, View, StyleSheet, Text, Button, Picker, TouchableOpacity, Dimensions } from 'react-native';
 import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
+import moment from 'moment';
 
   export default function Statistics({navigation}) {
     const [moodDropdown, setMoodDropdown] = useState([]);
@@ -14,6 +15,7 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
     const [scaleList, setScaleList] = useState([]);
     const [dateList, setDateList] = useState([]);
     const [countList, setCountList] = useState([]);
+
 
     useEffect(() => {
         fetch(`http://localhost:8080/user/1/moods/filter`)
@@ -38,9 +40,8 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
                 .then((json) => {
                     var scales = json.map(item => item.scale);
                     setScaleList([...scales]);
-                    var dates = json.map(item => item.entry.date);
+                    var dates = json.map(item => moment(item.entry.date).format('MMM D'));
                     setDateList([...dates]);
-                    console.log(dates);
                 })
                  .catch((error) => console.error(error))
                 .finally(() => setIsLoading(false));
@@ -61,8 +62,8 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
 
       return (
           <View style={styles.container}>
-              <Text style={styles.title}>Statistics</Text>
-              <View>
+              <View style={styles.dropdownContainer}>
+                <Text>Select Options for Line Graph</Text>
                 <Picker style={styles.dropdown} 
                         onValueChange={(itemValue, itemIndex) => {
                             setSelection(moodDropdown[itemValue]) }}>
@@ -79,7 +80,7 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
                             <Picker.Item label='Start Date' value='0' />        
                             {Object.keys(dateDropdown).map((key) => {
                             return (
-                                <Picker.Item label={dateDropdown[key]} value={key} key={key}/>) 
+                                <Picker.Item label={moment(dateDropdown[key]).format('MMM D, YYYY')} value={key} key={key}/>) 
                             })}
                     </Picker>
                     <Picker style={styles.dropdown} 
@@ -88,7 +89,7 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
                             <Picker.Item label='End Date' value='0' />        
                             {Object.keys(dateDropdown).map((key) => {
                             return (
-                                <Picker.Item label={dateDropdown[key]} value={key} key={key}/>) 
+                                <Picker.Item label={moment(dateDropdown[key]).format('MMM D, YYYY')} value={key} key={key}/>) 
                             })}
                     </Picker>
                 </View>
@@ -106,7 +107,7 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
              
   
 
-              <Text style={styles.title}> Line Chart</Text>
+              <Text style={styles.chartTitle}> Line Chart: {selection}</Text>
               <ScrollView horizontal={true}>
               <LineChart
                     data={{
@@ -116,6 +117,7 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
                     //width={Dimensions.get("window").width}
                     height={250}
                     width={350}
+                    yAxisInterval={1}
                     chartConfig={{
                         backgroundColor: 'rgba(134, 65, 244, ${opacity})',
                         backgroundGradientFrom: "#91B06B ",
@@ -140,14 +142,14 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
                 />
               </ScrollView>
 
+            <Text style={styles.chartTitle}>Bar Chart of Selected Moods</Text>
               <BarChart
                 data={{
                     labels: moodDropdown,
                     datasets: [ { data: countList } ],
                 }}
-                //width={Dimensions.get('window').width - 16}
-                width={500}
-                height={220}
+                height={250}
+                width={350}
                 chartConfig={{
                     backgroundColor: '#1cc910',
                     backgroundGradientFrom: '#eff3ff',
@@ -164,9 +166,12 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
                     borderRadius: 16,
                 }}
             />
-
              
-
+             <TouchableOpacity 
+                style={styles.barButton}
+                onPress={() => navigation.navigate('MoodSelection')}>
+                    <Text>Select Moods</Text>
+            </TouchableOpacity>
                 
           </View>
     
@@ -175,19 +180,19 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
 
   const styles = StyleSheet.create({
       container: {
-          backgroundColor: "white",
-          padding: 15,
-          flex: 1,
-          alignItems: 'center',
-          fontFamily: 'Avenir'
+        backgroundColor: "white",
+        padding: 15,
+        flex: 1,
+        alignItems: 'center',
+        fontFamily: 'Avenir'
       },
       title: {
         fontSize: 22,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        paddingBottom: 15,
       },
       dropdownContainer: {
-        flexDirection: 'row', 
-        alignContent: 'center',
+        alignItems: 'center',
     },
     dropdown: {
         width: 150,
@@ -196,7 +201,8 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
         paddingLeft: 10,
         margin: 10,
         borderRadius: 1,
-        borderColor: "#C0C0C0"
+        borderColor: "#C0C0C0",
+        borderRadius: 8
     },
     datesContainer: {
         flexDirection: 'row'
@@ -222,4 +228,8 @@ import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
         fontWeight: 'bold',
         padding: 0,
     },
+    chartTitle: {
+        fontFamily: 'Avenir',
+        fontSize: 18
+    }
   })

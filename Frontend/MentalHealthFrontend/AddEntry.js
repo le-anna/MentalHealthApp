@@ -92,7 +92,6 @@ export default function AddEntry({navigation}) {
          <Text style={styles.date}>{moment().format('ll')} </Text>
          <Text>Select from existing moods: </Text>
          <View className="entryFields">
-
              <View className="dropdownContainer" style={styles.dropdownContainer}>
                 <Picker style={styles.dropdown} 
                     onValueChange={(itemValue, itemIndex) => {
@@ -281,7 +280,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         margin: 10,
         borderRadius: 1,
-        borderColor: "#C0C0C0"
+        borderColor: "#C0C0C0",
+        borderRadius: 8
     },
    listDisplay: {
        flexDirection: "row",

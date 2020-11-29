@@ -1,11 +1,10 @@
 import React, {useState, useEffect, useReducer} from 'react';
-import { View, StyleSheet, TextInput, Text, FlatList, ActivityIndicator, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, TextInput, Text, FlatList, ActivityIndicator, TouchableOpacity, Picker} from 'react-native';
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 // import DatePicker from 'react-native-datepicker'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import moment from 'moment';
-import { render } from 'react-dom';
 
 export default function ViewEntry ({navigation}) {
     const [data, setData] = useState([]);
@@ -19,7 +18,15 @@ export default function ViewEntry ({navigation}) {
     const [deleteMood, setDeleteMood] = useState('');
     const [isNoteDelete, setIsNoteDelete] = useState(false);
     const [deleteNote, setDeleteNote] = useState('');
+    const [dateDropdown, setDateDropdown] = useState([]);
 
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/user/1/entries/filter`)
+        .then((response) => response.json())
+        .then((json) => setDateDropdown(json))
+        .catch((error) => console.error(error))   
+      }, []) 
 
     useEffect(() => {
         const fetchData = async() => {
@@ -73,15 +80,17 @@ export default function ViewEntry ({navigation}) {
             <View 
                 style={styles.container}>
                 <Text style={styles.title}>Search{"\n"}</Text>
-                <View className="search"
-                    style={styles.searchContainer}>
-                    <Text style={styles.textStyle}>Enter Date:</Text>
-                    <TextInput
-                        placeholder={"YYYY-MM-DD"}
-                        style={styles.inputStyle}
-                        value = {test}
-                        onChangeText={text => setTest(text)}> 
-                    </TextInput>
+
+                <View className="dates" style={styles.datesContainer}>
+                    <Picker style={styles.dropdown} 
+                        onValueChange={(itemValue, itemIndex) => {
+                             setTest(dateDropdown[itemValue]) }}>
+                        <Picker.Item label='Find By Date' value='0' />        
+                            {Object.keys(dateDropdown).map((key) => {
+                            return (
+                                <Picker.Item label={moment(dateDropdown[key]).format('MMM D, YYYY')} value={key} key={key}/>) 
+                         })}
+                    </Picker>
                 </View>
                 
                 <View style={styles.buttonContainer}>   
@@ -155,24 +164,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: 'white',
       padding: 15,
-      fontFamily: 'Avenir'
-    },
-    searchContainer : {
-        alignItems: 'center',
-        justifyContent: 'center', 
-    },
-    textStyle: {
-        fontSize: 18,
-        paddingBottom: 10,
-    },
-    inputStyle: {
-        fontSize: 18,
-        width: 325,
-        height: 45,
-        backgroundColor: '#F5F5F5',
-        borderRadius: 5,
-        color: 'black',
-        paddingLeft: 5,
+      fontFamily: 'Avenir',
     },
     title : {
         fontSize: 22,
@@ -238,5 +230,18 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         paddingRight: 5,
         paddingBottom: 20,
-    }
+    },
+    dropdownContainer: {
+        alignItems: 'center',
+    },
+    dropdown: {
+        width: 300,
+        height: 40,
+        fontSize: 18,
+        paddingLeft: 10,
+        margin: 10,
+        borderRadius: 1,
+        borderColor: "#C0C0C0",
+        borderRadius: 8,
+    },
 });
