@@ -1,6 +1,6 @@
 package service;
 
-import java.util.List;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,12 +51,27 @@ public class MoodService {
 		return moodRepo.findByName(name);
 	}
 
+	public TreeSet<String> getMoodsForDropdown () {
+        List<Mood> allMoods = moodRepo.findAll();
+        Set<String> set = new HashSet<>();
+        for (Mood item : allMoods) {
+            set.add(item.getName());
+        }
+        TreeSet<String> treeSet = new TreeSet<String>();
+		treeSet.addAll(set);
+        return treeSet;
+    }
+
 	public List<Mood> findByEntry_UserId_AndEntry_DateBetween(int userId, String startDate, String endDate) {
 		return moodRepo.findByEntry_UserId_AndEntry_DateBetween(userId, startDate, endDate);
 	}
 
 	public List<Mood> findByName_AndEntry_UserId_AndEntry_DateBetween(String name, int userId, String startDate, String endDate) {
 		return moodRepo.findByName_AndEntry_UserId_AndEntry_DateBetween(name, userId, startDate, endDate);
+	}
+
+	public int countByName_AndEntry_UserId(String moodName, int userId) {
+		return moodRepo.countByName_AndEntry_UserId(moodName, userId);
 	}
 
 }

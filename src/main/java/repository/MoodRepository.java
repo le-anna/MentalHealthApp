@@ -14,6 +14,7 @@ public interface MoodRepository extends JpaRepository<Mood, Integer> {
     List<Mood> findByEntry_UserId(int userId);
     List<Mood> findByEntry_UserId_AndEntry_DateBetween(int userId, String startDate, String endDate);
     List<Mood> findByName_AndEntry_UserId_AndEntry_DateBetween(String name, int userId, String startDate, String endDate);
+    int countByName_AndEntry_UserId(String name, int userId);
     void deleteByName(Mood mood);
     Mood findByName(String name);
     Mood findById(int id);

@@ -1,13 +1,11 @@
 package controllers;
 
 import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -61,13 +59,8 @@ public class MoodController {
     }
 
     @GetMapping("user/{userId}/moods/filter") 
-    public Set<String> getMoodsForDropdown () {
-        List<Mood> allMoods = moodService.getMoods();
-        Set<String> set = new HashSet<>();
-        for (Mood item : allMoods) {
-            set.add(item.getName());
-        }
-        return set;
+    public TreeSet<String> getMoodsForDropdown () {
+       return moodService.getMoodsForDropdown();
     }
 
     @GetMapping("user/{userId}/search/date/{startDate}/{endDate}") 
@@ -78,6 +71,17 @@ public class MoodController {
     @GetMapping("user/{userId}/search/{moodName}/{startDate}/{endDate}") 
     public List<Mood> findByNameAndDateBetween(@PathVariable (value = "moodName") String moodName, @PathVariable (value = "userId") int userId, @PathVariable (value = "startDate") String startDate, @PathVariable (value = "endDate") String endDate) {
         return moodService.findByName_AndEntry_UserId_AndEntry_DateBetween(moodName, userId, startDate, endDate);
+    }
+
+    @GetMapping("user/{userId}/count")
+    public List<Integer> moodCount(@PathVariable (value = "userId") int userId) {
+        List<Integer> count = new ArrayList<Integer>();
+        TreeSet<String> treeSet = moodService.getMoodsForDropdown();
+        for (String temp : treeSet) {
+            int num = moodService.countByName_AndEntry_UserId(temp, userId);
+            count.add(num);
+        }
+        return count;
     }
 
     @PostMapping("/entry/{entryId}/mood") 
@@ -122,7 +126,7 @@ public class MoodController {
     } 
 
     @DeleteMapping("deleteMood/{entryDate}/{name}")
-    public void deleteMood ( @PathVariable (value = "entryDate") String entryDate, @PathVariable (value = "name") String name) {
+    public void deleteMood (@PathVariable (value = "entryDate") String entryDate, @PathVariable (value = "name") String name) {
         if (moodService.existsByEntryDateAndName(entryDate, name)) {
             mood_repo.deleteById(moodService.findByEntryDateAndName(entryDate, name).getId());
         }
