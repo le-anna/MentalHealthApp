@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple'
 
-export default function MoodSelection ({navigation}) {
+export default function MoodSelection ({route, navigation}) {
     const [moodDropdown, setMoodDropdown] = useState([]);
     const [selectedMoods, setSelectedMoods] = useState([]);
+    const [test, setTest] = useState([]);
 
     useEffect(() => {
         fetch(`http://localhost:8080/user/1/moods/filter`)
@@ -14,7 +15,9 @@ export default function MoodSelection ({navigation}) {
     }, []) 
 
     const handleChange = (event) => {
-        setSelectedMoods([...event])
+        setSelectedMoods([...event]);
+        var temp = event.map(obj => obj.value);
+        setTest({moods: temp});
     }
 
     return (
@@ -26,6 +29,10 @@ export default function MoodSelection ({navigation}) {
                  onSelectionsChange={handleChange}
                  maxSelect={4}
             />
+            <TouchableOpacity
+                 onPress={() => navigation.navigate('Statistics', test)}>
+                <Text>Done</Text>
+            </TouchableOpacity>
         </View>
 
     )

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Home from './Home'
 import AddEntry from './AddEntry'
 import ViewEntry from './ViewEntry'
@@ -69,14 +69,18 @@ export default function App() {
               headerStyle: {
               backgroundColor: '#699125',
               }}}/>
-            <Stack.Screen 
-              name="Mood Selection" 
-              component={MoodSelection}
-            />
            <Stack.Screen 
               name="SearchDetail" 
               component={SearchDetail}
-            />
+              options={{ 
+                title: 'Search Details', 
+                headerTintColor: 'black',
+                headerStyle: {
+                backgroundColor: '#699125',
+                }}}/>
+            <Stack.Screen 
+              name="Mood Selection" 
+              component={MoodSelection}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </View>

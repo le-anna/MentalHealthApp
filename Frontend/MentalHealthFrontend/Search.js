@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, ActivityIndicator, FlatList, ScrollView } from 'react-native';
 
 import "react-datepicker/dist/react-datepicker.css";
+
+import moment from 'moment';
 
 export default function CalendarInfo ({navigation}) {
   const [search, setSearch] = useState("");
@@ -34,7 +36,6 @@ export default function CalendarInfo ({navigation}) {
   }, [search])
 
 
-
   return (
    <View style={styles.container}>
       <Text style={styles.title}>Search Notes{"\n"}</Text>
@@ -54,14 +55,13 @@ export default function CalendarInfo ({navigation}) {
                   renderItem={({ item }) => (
                   <TouchableOpacity style={styles.entriesContainer}
                     keyExtractor={item => item.id.toString()}
-                    onPress={() => navigation.navigate('SearchDetail', item.entry)}>
+                    onPress={() => navigation.push('SearchDetail', item.entry)}>
                     <Text style={styles.textStyle}>{item.note}{"\n"}</Text>
-                    <Text style={styles.noteDate}>{item.entry.date}</Text>
+                    <Text style={styles.noteDate}>{moment(item.entry.date).format('MMM D')}</Text>
                   </TouchableOpacity>
                 )}/>
               )}
-          </View>
-              
+          </View>    
    </View>
   )
 }
@@ -116,7 +116,7 @@ textStyle: {
 noteDate: {
   fontSize: 14,
   color: 'grey',
-  padding: 5,
+  paddingLeft: 5,
 }
   });
    

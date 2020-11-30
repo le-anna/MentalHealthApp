@@ -124,7 +124,7 @@ export default function ViewEntry ({navigation}) {
                                             onPress={() => {
                                                 setDeleteMood(item.id);
                                                 setIsMoodDelete(true);
-                                                setUrl(`http://localhost:8080/user/1`);}}>
+                                                setUrl(`http://localhost:8080/user/1${test}` + `/notes`);}}>
                                             <FontAwesomeIcon icon="trash" />
                                         </TouchableOpacity>
                                 </View>

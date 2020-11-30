@@ -7,7 +7,6 @@ import logo from './circleTest.png';
 
 export default function Home ({navigation}) {
     const [username, setUserName] = useState([]);
-    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:8080/user/1', {
@@ -42,12 +41,6 @@ export default function Home ({navigation}) {
                     title="View Entries"
                     onPress={() => navigation.navigate('ViewEntry')}>
                          <FontAwesomeIcon icon="bars" />
-                </TouchableOpacity>
-                <TouchableOpacity 
-                     style={styles.barButton}
-                    title="CalendarInfo"
-                    onPress={() => navigation.navigate('CalendarInfo')}>
-                         <FontAwesomeIcon icon="calendar" />
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.barButton}

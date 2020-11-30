@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, ScrollView } from 'react-native';
 
 export default function SearchDetail ({route, navigation}) {
     const { date } = route.params;

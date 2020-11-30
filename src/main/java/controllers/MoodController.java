@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,11 +44,6 @@ public class MoodController {
 		return moodService.findByEntryId(moodEntryId);
     }
 
-    // @GetMapping("{entryDate}/moods")
-    // public Mood findByEntryDate(@PathVariable (value = "entryDate") String entryDate) {
-    //     return moodService.findByEntryDate(entryDate);
-    // }
-
     @GetMapping("{entryDate}/user/{userId}/moods")
     public List<Mood> findByEntry_UserId_AndEntry_Date(@PathVariable (value = "userId") int userId, @PathVariable (value = "entryDate") String entryDate) {
         return moodService.findByEntry_UserId_AndEntry_Date(userId, entryDate);
@@ -79,6 +75,16 @@ public class MoodController {
         TreeSet<String> treeSet = moodService.getMoodsForDropdown();
         for (String temp : treeSet) {
             int num = moodService.countByName_AndEntry_UserId(temp, userId);
+            count.add(num);
+        }
+        return count;
+    }
+
+    @PostMapping("user/{userId}/count/request")
+    public List<Integer> moodCountForselected(@PathVariable (value = "userId") int userId, @RequestBody List<String> selectedMoods) {
+        List<Integer> count = new ArrayList<Integer>();
+        for (String moodName : selectedMoods) {
+            int num = moodService.countByName_AndEntry_UserId(moodName, userId);
             count.add(num);
         }
         return count;

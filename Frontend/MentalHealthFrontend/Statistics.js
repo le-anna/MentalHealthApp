@@ -3,7 +3,7 @@ import { ScrollView, View, StyleSheet, Text, Button, Picker, TouchableOpacity, D
 import { LineChart, ContributionGraph, BarChart } from "react-native-chart-kit";
 import moment from 'moment';
 
-  export default function Statistics({navigation}) {
+  export default function Statistics({route, navigation}) {
     const [moodDropdown, setMoodDropdown] = useState([]);
     const [dateDropdown, setDateDropdown] = useState([]);
     const [selection, setSelection] = useState("");
@@ -48,16 +48,34 @@ import moment from 'moment';
             };
             fetchData();
         }
-        const fetchCount = async() => {
-            const result = await fetch(`http://localhost:8080/user/1/count`)
+        // const fetchCount = async() => {
+        //     const result = await fetch(`http://localhost:8080/user/1/count`)
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         var count = json;
+        //         setCountList([...count]);
+        //     })
+        // };
+        // fetchCount();
+    }, [submit]);
+
+    useEffect(() => {
+        if (route.params?.moods) {
+            fetch(`http://localhost:8080/user/1/count/request` , {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(route.params?.moods)
+            })
             .then((res) => res.json())
             .then((json) => {
                 var count = json;
                 setCountList([...count]);
             })
-        };
-        fetchCount();
-    }, [submit]);
+        };           
+     }, [route.params?.moods]);
 
 
       return (
@@ -115,7 +133,7 @@ import moment from 'moment';
                         datasets: [ { data: scaleList } ]
                     }}
                     //width={Dimensions.get("window").width}
-                    height={250}
+                    height={200}
                     width={350}
                     yAxisInterval={1}
                     chartConfig={{
@@ -141,20 +159,26 @@ import moment from 'moment';
                     }}
                 />
               </ScrollView>
+            
+            <Text style={styles.chartTitle}>Bar Chart for Select Moods</Text>
 
-            <Text style={styles.chartTitle}>Bar Chart of Selected Moods</Text>
+            <TouchableOpacity 
+                style={styles.barButton}
+                onPress={() => navigation.navigate('Mood Selection')}>
+                    <Text style={styles.link}>Click to Select Moods</Text>
+             </TouchableOpacity>
+            
               <BarChart
                 data={{
-                    labels: moodDropdown,
+                    labels: route.params?.moods,
                     datasets: [ { data: countList } ],
                 }}
-                height={250}
+                height={200}
                 width={350}
                 chartConfig={{
                     backgroundColor: '#1cc910',
                     backgroundGradientFrom: '#eff3ff',
                     backgroundGradientTo: '#efefef',
-                    decimalPlaces: 2,
                     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                     decimalPlaces: 0,
                     style: {
@@ -166,13 +190,10 @@ import moment from 'moment';
                     borderRadius: 16,
                 }}
             />
-             
-             <TouchableOpacity 
-                style={styles.barButton}
-                onPress={() => navigation.navigate('MoodSelection')}>
-                    <Text>Select Moods</Text>
-            </TouchableOpacity>
-                
+             <View>
+               
+             </View>
+
           </View>
     
       )
@@ -212,7 +233,7 @@ import moment from 'moment';
         justifyContent: 'center', 
         textAlign: 'center',
         paddingTop: 15,
-        paddingBottom: 15,
+        paddingBottom: 25,
     },
     buttonStyle: {
         alignItems: 'center',
@@ -231,5 +252,8 @@ import moment from 'moment';
     chartTitle: {
         fontFamily: 'Avenir',
         fontSize: 18
+    },
+    link: {
+        color: '#616C93'
     }
   })
