@@ -39,20 +39,23 @@ export default function AddEntry({navigation}) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(moodList)
-            }),
-            fetch('http://localhost:8080/entry/' + currDate + `/note`, {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    note: note
-                })
-            })
+            });
+            setTimeout(() => {
+                {
+                    fetch('http://localhost:8080/entry/' + currDate + `/note`, {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            note: note
+                        })
+                    })
+                }
+            }, 200);
         }
     }, [isFilledOut]) 
-
 
     function handleTextChange () {
         const count = 100;
@@ -187,7 +190,7 @@ export default function AddEntry({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#404C7E',
+        backgroundColor: '#303F5C',
         flexDirection: 'column'
     },
     titleContainer: {
@@ -216,7 +219,7 @@ const styles = StyleSheet.create({
     moodContainer: {
         flexDirection: 'row', 
         alignContent: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     inputBox: {
         fontSize: 18,
@@ -225,9 +228,9 @@ const styles = StyleSheet.create({
         width: 150,
         borderWidth: 1,
         paddingLeft: 5, 
-        borderColor: '#FFEC9F', 
+        borderColor: '#F8D287', 
         fontFamily: 'Avenir',
-        backgroundColor: '#FFEC9F',
+        backgroundColor: '#F8D287',
         borderRadius: 8,
     },
     note: {
@@ -242,7 +245,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.29,
         shadowRadius: 4,
-        backgroundColor: '#FFEC9F',
+        backgroundColor: '#F8D287',
         alignItems: 'center',
     },
     noteInput: {
@@ -253,7 +256,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         margin: 20,
         paddingLeft: 10, 
-        borderColor: '#FFEC9F',
+        borderColor: '#F8D287',
         fontFamily: 'Avenir',
     }, 
     buttonContainer : {
@@ -299,9 +302,9 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 1,
         borderRadius: 8,
-        borderColor: '#FFEC9F',
+        borderColor: '#F8D287',
         fontFamily: 'Avenir',
-        backgroundColor: '#FFEC9F'
+        backgroundColor: '#F8D287',        
     },
     scaleDropdown: {
         width: 80,
@@ -310,10 +313,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         borderRadius: 1,
-        borderColor: "#FFEC9F",
+        borderColor: "#F8D287",
         borderRadius: 8,
         fontFamily: 'Avenir',
-        backgroundColor: '#FFEC9F'
+        backgroundColor: '#F8D287'
     },
    listDisplay: {
         flex: 1,

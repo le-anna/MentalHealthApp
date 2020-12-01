@@ -28,10 +28,15 @@ export default function App() {
             component={Home}
             options={{ 
               title: 'Home', 
-              headerTintColor: 'white',
+              headerTintColor: '#404C7E',
               headerStyle: {
-                backgroundColor: '#404C7E',
-                borderBottomColor: '#404C7E',
+                backgroundColor: '#FCEFDF',
+                borderBottomColor: '#FCEFDF',
+              },
+              headerTitleStyle: {
+                textAlign: 'center',
+                fontWeight: 'bold',
+                fontFamily: 'Avenir'
               }}}/>
           <Stack.Screen name="AddEntry" 
             component={AddEntry} 
@@ -39,11 +44,12 @@ export default function App() {
               title: moment().format('ddd, MMM D'), 
               headerTintColor: 'white',
               headerStyle: {
-                backgroundColor: '#404C7E',
-                borderBottomColor: '#404C7E',
+                backgroundColor: '#303F5C',
+                borderBottomColor: '#303F5C',
               },
               headerTitleStyle: {
                 fontWeight: 'bold',
+                fontFamily: 'Avenir'
               }}}/>
           <Stack.Screen name="ViewEntry" 
             options={{ title: 'View Entry' }}
@@ -52,8 +58,12 @@ export default function App() {
               title: 'View Entry', 
               headerTintColor: 'white',
               headerStyle: {
-                backgroundColor: '#404C7E',
-                borderBottomColor: '#404C7E'
+                backgroundColor: '#303F5C',
+                borderBottomColor: '#303F5C'
+              },
+              headerTitleStyle: {
+                fontWeight: 'bold',
+                fontFamily: 'Avenir'
               }}}/>
           <Stack.Screen name="Statistics" 
               component={Statistics}
@@ -61,8 +71,12 @@ export default function App() {
                 title: 'Statistics', 
                 headerTintColor: 'white',
                 headerStyle: {
-                  backgroundColor: '#404C7E',
-                  borderBottomColor: '#404C7E',
+                  backgroundColor: '#303F5C',
+                  borderBottomColor: '#303F5C',
+                },
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  fontFamily: 'Avenir'
                 }}}/>
           <Stack.Screen name="Search" 
             component={Search}
@@ -70,8 +84,12 @@ export default function App() {
               title: 'Search', 
               headerTintColor: 'white',
               headerStyle: {
-                backgroundColor: '#404C7E',
-                borderBottomColor: '#404C7E',
+                backgroundColor: '#303F5C',
+                borderBottomColor: '#303F5C',
+              },
+              headerTitleStyle: {
+                fontWeight: 'bold',
+                fontFamily: 'Avenir'
               }}}/>
            <Stack.Screen name="SearchDetail" 
               component={SearchDetail}
@@ -79,12 +97,27 @@ export default function App() {
                 title: 'Search Details', 
                 headerTintColor: 'white',
                 headerStyle: {
-                  backgroundColor: '#404C7E',
-                  borderBottomColor: '#404C7E',
+                  backgroundColor: '#303F5C',
+                  borderBottomColor: '#303F5C',
+                },
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  fontFamily: 'Avenir'
                 }}}/>
             <Stack.Screen 
               name="Mood Selection" 
-              component={MoodSelection}/>
+              component={MoodSelection}
+              options={{ 
+                title: 'Mood Selection', 
+                headerTintColor: 'white',
+                headerStyle: {
+                  backgroundColor: '#303F5C',
+                  borderBottomColor: '#303F5C',
+                },
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  fontFamily: 'Avenir'
+                }}}/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </View>

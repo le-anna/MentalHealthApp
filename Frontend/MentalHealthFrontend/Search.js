@@ -70,7 +70,7 @@ export default function CalendarInfo ({navigation}) {
     container: {
       flex: 1,
       alignItems: 'center', 
-      backgroundColor: '#404C7E',
+      backgroundColor: '#303F5C',
       padding: 15,
     },
     title : {
@@ -89,7 +89,7 @@ export default function CalendarInfo ({navigation}) {
       fontSize: 18,
       width: 325,
       height: 45,
-      backgroundColor: '#F5F5F5',
+      backgroundColor: '#F8D287',
       borderRadius: 5,
       color: 'black',
       paddingLeft: 5,
@@ -105,8 +105,8 @@ export default function CalendarInfo ({navigation}) {
       paddingTop: 14,   
       borderRadius: 5,
       marginBottom: 4,
-      backgroundColor: '#FFEC9F',
-      borderColor: '#FFEC9F',
+      backgroundColor: '#F8D287',
+      borderColor: '#F8D287',
       fontFamily: 'Avenir',
     },
     textStyle: {

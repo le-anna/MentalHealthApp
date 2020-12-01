@@ -22,8 +22,8 @@ export default function MoodSelection ({route, navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text>Select Four</Text>
-            <SelectMultiple
+            <Text style={styles.description}>Select Four</Text>
+            <SelectMultiple style={styles.selectApi}
                  items={moodDropdown}
                  selectedItems={selectedMoods}
                  onSelectionsChange={handleChange}
@@ -40,9 +40,20 @@ export default function MoodSelection ({route, navigation}) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
+        backgroundColor: 'white',
         padding: 15,
         flex: 1,
         fontFamily: 'Avenir'
     },
+    description: {
+        textAlign: 'center',
+        fontFamily: 'Avenir',
+        fontSize: 16,
+        color: 'black',
+        letterSpacing: 3
+    },
+    selectApi: {
+        fontFamily: 'Avenir',
+        letterSpacing: 1
+    }
 })

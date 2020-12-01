@@ -137,9 +137,9 @@ import moment from 'moment';
                     width={350}
                     yAxisInterval={1}
                     chartConfig={{
-                        backgroundColor: "#FFEC9F",
-                        backgroundGradientFrom: "#FFEC9F",
-                        backgroundGradientTo: "#FFEC9F",
+                        backgroundColor: "#F8D287",
+                        backgroundGradientFrom: "#F8D287",
+                        backgroundGradientTo: "#F8D287",
                         color: (opacity = 1) => `rgba(166, 205, 181, ${opacity})`,
                         labelColor: (opacity = 1) => `rgba(, 0, 0, ${opacity})`,
                         decimalPlaces: 0,
@@ -177,10 +177,11 @@ import moment from 'moment';
                 height={200}
                 width={350}
                 chartConfig={{
-                    backgroundColor: '#1cc910',
-                    backgroundGradientFrom: '#eff3ff',
-                    backgroundGradientTo: '#efefef',
-                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                    backgroundColor: '#F8D287',
+                    backgroundGradientFrom: '#F8D287',
+                    backgroundGradientTo: '#F8D287',
+                    color: (opacity = 1) => `rgba(166, 205, 181)`,
+                    labelColor: (opacity = 1) => `rgba(, 0, 0, 0)`,
                     decimalPlaces: 0,
                     style: {
                     borderRadius: 16,
@@ -202,7 +203,7 @@ import moment from 'moment';
 
   const styles = StyleSheet.create({
       container: {
-        backgroundColor: '#404C7E',
+        backgroundColor: '#303F5C',
         padding: 15,
         flex: 1,
         alignItems: 'center',
@@ -232,8 +233,8 @@ import moment from 'moment';
         paddingLeft: 10,
         margin: 10,
         borderRadius: 1,
-        borderColor: '#FFEC9F',
-        backgroundColor: '#FFEC9F',
+        borderColor: '#F8D287',
+        backgroundColor: '#F8D287',
         borderRadius: 8,
         fontFamily: 'Avenir',
     },

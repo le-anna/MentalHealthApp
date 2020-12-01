@@ -79,7 +79,7 @@ export default function ViewEntry ({navigation}) {
         return (
             <View 
                 style={styles.container}>
-                <Text style={styles.title}>Search{"\n"}</Text>
+                <Text style={styles.title}>View entry</Text>
 
                 <View className="dropdown" style={styles.dropdownContainer}>
                     <Picker style={styles.dropdown} 
@@ -94,8 +94,7 @@ export default function ViewEntry ({navigation}) {
                 </View>
                 
                 <View style={styles.buttonContainer}>   
-                    <TouchableOpacity 
-                        style={styles.buttonStyle}
+                    <TouchableOpacity style={styles.buttonStyle}
                         onPress={() => {
                             setUrl(`http://localhost:8080/${test}` + `/user/1/moods`);
                             setNoteUrl(`http://localhost:8080/user/1/${test}` + `/notes`)}}>
@@ -118,8 +117,7 @@ export default function ViewEntry ({navigation}) {
                             renderItem={({ item }) => (
                                 <View style={styles.entriesContainer}
                                         keyExtractor={item => item.id.toString()}>
-                                    <Text style={styles.textStyle}> 
-                                        {item.name}{" "}{item.scale} </Text>
+                                    <Text style={styles.textStyle}> {item.name}{" "}{item.scale}</Text>
                                          <TouchableOpacity style={styles.trashIcon}
                                             onPress={() => {
                                                 setDeleteMood(item.id);
@@ -138,7 +136,7 @@ export default function ViewEntry ({navigation}) {
                             renderItem={({ item }) => (
                             <View style={styles.note}
                                 keyExtractor={item => item.id.toString()}>
-                                    <Text style={styles.textStyle}> {item.note}</Text>
+                                    <Text style={styles.textStyle}>{item.note}</Text>
                                         <TouchableOpacity style={styles.trashIcon}
                                              onPress={() => {
                                                 setDeleteNote(item.id);
@@ -162,7 +160,7 @@ export default function ViewEntry ({navigation}) {
 const styles = StyleSheet.create({
     container: { 
       flex: 1,
-      backgroundColor: '#404C7E',
+      backgroundColor: '#303F5C',
       padding: 15,
       fontFamily: 'Avenir',
     },
@@ -208,8 +206,8 @@ const styles = StyleSheet.create({
         paddingTop: 14, 
         borderWidth: 1,
         borderRadius: 5,
-        backgroundColor: '#FFEC9F',
-        borderColor: '#FFEC9F',
+        backgroundColor: '#F8D287',
+        borderColor: '#F8D287',
         fontFamily: 'Avenir',
     },
     noteContainer: {
@@ -223,8 +221,8 @@ const styles = StyleSheet.create({
         padding: 16,
         borderWidth: 1,
         borderRadius: 5,
-        backgroundColor: '#FFEC9F',
-        borderColor: '#FFEC9F',
+        backgroundColor: '#F8D287',
+        borderColor: '#F8D287',
         fontFamily: 'Avenir',
     },
     reloadIcon : {
@@ -242,8 +240,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         margin: 10,
         borderRadius: 1,
-        borderColor: '#FFEC9F',
-        backgroundColor: '#FFEC9F',
+        borderColor: '#F8D287',
+        backgroundColor: '#F8D287',
         borderRadius: 8,
         fontFamily: 'Avenir',
     },

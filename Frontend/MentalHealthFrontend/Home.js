@@ -2,7 +2,8 @@ import React, { useLayoutEffect } from 'react';
 import { Alert, StyleSheet, Text, View, ImageBackground, Button, TouchableOpacity} from 'react-native';
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import logo from './circleTest.png';
+//import logo from './circleTest.png';
+import logo from './homeBackground.jpeg'
 
 
 export default function Home ({navigation}) {
@@ -24,37 +25,43 @@ export default function Home ({navigation}) {
     return (
         <View style={styles.container}>  
             <ImageBackground source={logo} style={styles.image}>
-                <Text style={styles.text}>
-                    Hello, {""} 
-                    {username}
-                </Text>
-                <TouchableOpacity 
-                    style={styles.buttonStyle} 
-                    onPress={() => navigation.navigate('AddEntry')}>
-                        <Text style={styles.buttonText}>Add Entry</Text>
-                </TouchableOpacity>
-            </ImageBackground>
+                <View className="imagePortion" style={{height: '60%'}}></View>
+                <View className="greetingContainer" style={styles.greetingContainer}>
+                    <Text style={styles.text}>Hello, how are you today?</Text>
+                </View>
+                <View className="buttonContainer" style={styles.buttonContainer}>
+                    <TouchableOpacity 
+                        style={styles.buttonStyle} 
+                        onPress={() => navigation.navigate('AddEntry')}>
+                            <Text style={styles.buttonText}>Add Entry</Text>
+                    </TouchableOpacity>
+                </View>
 
             <View style={styles.barContianer}>
                 <TouchableOpacity 
                     style={styles.barButton}
                     title="View Entries"
                     onPress={() => navigation.navigate('ViewEntry')}>
-                         <FontAwesomeIcon icon="bars" style={{color: '#A6CDB5'}}/>
+                         <FontAwesomeIcon icon="bars" style={{color: '#404C7E'}}/>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.barButton}
                     title="View Statistics"
                     onPress={() => navigation.navigate('Statistics')}>
-                        <FontAwesomeIcon icon="chart-bar" style={{color: '#A6CDB5'}}/>
+                        <FontAwesomeIcon icon="chart-bar" style={{color: '#404C7E'}}/>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.barButton}
                     title="Search"
                     onPress={() => navigation.navigate('Search')}>
-                        <FontAwesomeIcon icon="search" style={{color: '#A6CDB5'}}/>
+                        <FontAwesomeIcon icon="search" style={{color: '#404C7E'}}/>
                 </TouchableOpacity>
             </View>
+            </ImageBackground>
+        
+
+
+        
 
         </View>
         
@@ -68,46 +75,56 @@ const styles = StyleSheet.create({
       justifyContent: 'center', 
       backgroundColor: 'white',
     },
-    text: {
-        marginTop: 120,
+    greetingContainer: {
+        alignItems: 'center',
+        justifyContent: 'center', 
+        height: '15%',
+        textAlign: 'center'
+    },
+    buttonContainer: {
+        height: '15%',
+        alignItems: 'center',
         textAlign: 'center',
-        fontSize: 40,
+    },
+    text: {
+        fontSize: 30,
         fontFamily: 'Avenir',
-        paddingBottom: 20,
+        letterSpacing: 2,
+        padding: 10,
+        color: 'black'
     },
     image: {
-        width:300, 
-        height:300, 
+       height: '100%',
+       width: '100%',
+       flexDirection: 'column'
     },
     buttonStyle: {
-        marginLeft: 100,
-        paddingTop: 8,
-        paddingBottom: 8,
+        alignItems: 'center',
+        justifyContent: 'center', 
         textAlign: 'center',
-        width: 100,
-        backgroundColor: "#699125",
+        backgroundColor: '#A6CDB5',
+        height: 40, 
+        width: 200,
+        padding: 10,
         borderRadius: 5,
-        shadowColor: 'rgba(0, 0, 0, 0.1)',
-        shadowOpacity: 0.8,
-        elevation: 6,
-        shadowRadius: 15 ,
-        shadowOffset : { width: 1, height: 13},
     },
     buttonText: {
-        color: 'white',
-        fontWeight: 'bold'
+        color: 'black',
+        fontFamily: 'Avenir'
     },
     barContianer: {
+        width: '100%',
+        justifyContent: 'center',
         flexDirection: 'row',
         position: 'absolute',
-        bottom: 20,
+        bottom: 0,
+        paddingBottom: 15
     }, 
     barButton: {
         padding: 8,
         borderRadius: 5,
         marginLeft: 20,
         marginRight: 20,
-
     }
   });
 
