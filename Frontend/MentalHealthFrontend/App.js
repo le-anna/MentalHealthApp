@@ -14,6 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync, faCaretDown} from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment';
 
 library.add(fab, faBars, faCalendar, faSearch, faTrash, faChartBar, faCalendarPlus, faSync, faCaretDown)
 
@@ -23,60 +24,63 @@ export default function App() {
     <NavigationContainer>{
       <View style={styles.container}>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen 
-            name="Home"
+          <Stack.Screen name="Home"
             component={Home}
             options={{ 
               title: 'Home', 
-              headerTintColor: 'black',
+              headerTintColor: 'white',
               headerStyle: {
-              backgroundColor: '#699125'
+                backgroundColor: '#404C7E',
+                borderBottomColor: '#404C7E',
               }}}/>
-          <Stack.Screen 
-            name="AddEntry" 
+          <Stack.Screen name="AddEntry" 
             component={AddEntry} 
             options={{ 
-              title: 'Add Entry', 
-              headerTintColor: 'black',
+              title: moment().format('ddd, MMM D'), 
+              headerTintColor: 'white',
               headerStyle: {
-              backgroundColor: '#699125',
+                backgroundColor: '#404C7E',
+                borderBottomColor: '#404C7E',
+              },
+              headerTitleStyle: {
+                fontWeight: 'bold',
               }}}/>
-          <Stack.Screen 
-            name="ViewEntry" 
+          <Stack.Screen name="ViewEntry" 
             options={{ title: 'View Entry' }}
             component={ViewEntry}
             options={{ 
               title: 'View Entry', 
-              headerTintColor: 'black',
+              headerTintColor: 'white',
               headerStyle: {
-              backgroundColor: '#699125'
+                backgroundColor: '#404C7E',
+                borderBottomColor: '#404C7E'
               }}}/>
-          <Stack.Screen 
-            name="Statistics" 
+          <Stack.Screen name="Statistics" 
               component={Statistics}
               options={{ 
                 title: 'Statistics', 
-                headerTintColor: 'black',
+                headerTintColor: 'white',
                 headerStyle: {
-                backgroundColor: '#699125',
+                  backgroundColor: '#404C7E',
+                  borderBottomColor: '#404C7E',
                 }}}/>
-          <Stack.Screen 
-            name="Search" 
+          <Stack.Screen name="Search" 
             component={Search}
             options={{ 
               title: 'Search', 
-              headerTintColor: 'black',
+              headerTintColor: 'white',
               headerStyle: {
-              backgroundColor: '#699125',
+                backgroundColor: '#404C7E',
+                borderBottomColor: '#404C7E',
               }}}/>
-           <Stack.Screen 
-              name="SearchDetail" 
+           <Stack.Screen name="SearchDetail" 
               component={SearchDetail}
               options={{ 
                 title: 'Search Details', 
-                headerTintColor: 'black',
+                headerTintColor: 'white',
                 headerStyle: {
-                backgroundColor: '#699125',
+                  backgroundColor: '#404C7E',
+                  borderBottomColor: '#404C7E',
                 }}}/>
             <Stack.Screen 
               name="Mood Selection" 

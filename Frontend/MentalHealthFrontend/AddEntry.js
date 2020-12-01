@@ -70,10 +70,7 @@ export default function AddEntry({navigation}) {
     
     function checkNoteInput() {
         if(characters > 0) {
-            alert("Submitted!");
             setIsFilledOut(true);
-        } else {
-            alert("Please enter note input.");
         }
     }
 
@@ -89,10 +86,10 @@ export default function AddEntry({navigation}) {
 
     return(
         <View style={styles.container}>
-         <Text style={styles.date}>{moment().format('ll')} </Text>
-         <Text>Select from existing moods: </Text>
-         <View className="entryFields">
-             <View className="dropdownContainer" style={styles.dropdownContainer}>
+        <View style={styles.titleContainer}><Text style={styles.title}>What's on your mind today?</Text></View>
+         <View className="entry" style={styles.entriesContainer}>
+            <Text style={styles.description}>Select existing moods</Text>
+             <View className="moodContainer" style={styles.moodContainer}>
                 <Picker style={styles.dropdown} 
                     onValueChange={(itemValue, itemIndex) => {
                         setNameSelect(moodDropdown[itemValue]) }}>
@@ -102,10 +99,10 @@ export default function AddEntry({navigation}) {
                         <Picker.Item label={moodDropdown[key]} value={key} key={key}/>) 
                     })}
                 </Picker>
-                <Picker style={styles.dropdown} 
+                <Picker style={styles.scaleDropdown} 
                     onValueChange={(itemValue, itemIndex) => {
                         setScaleSelect(scaleArray[itemValue]) }}>
-                    <Picker.Item label='Select scale' value='0' />      
+                    <Picker.Item label='Scale' value='0' />      
                     {Object.keys(scaleArray).map((key) => {
                     return (
                         <Picker.Item label={scaleArray[key]} value={key} key={key}/>) 
@@ -115,23 +112,21 @@ export default function AddEntry({navigation}) {
                     <TouchableOpacity
                         style={styles.addText}
                         onPress={handleListSelection}>
-                            <Text style={styles.buttonText}> + </Text>
+                            <Text style={styles.buttonText}>Add mood</Text>
                     </TouchableOpacity>
                 </View>
-    
              </View>
-           
-             <Text style={{textAlign: 'center'}}>Input new mood: </Text>
-             <View className="inputContainer" style={styles.inputContainer}>
-                <TextInput style = {styles.inputBox}
-                    placeholder="Enter Mood"
-                    placeholderTextColor="Black"
+             <Text style={styles.description}>Input new mood</Text>
+             <View className="inputContainer" style={styles.moodContainer}>
+                <TextInput style={styles.inputBox}
+                    placeholder="Enter mood"
+                    placeholderTextColor="black"
                     autoCapitalize="none"
                     onChangeText={mood => setNameInput(mood)} />
-                <Picker style={styles.dropdown} 
+                <Picker style={styles.scaleDropdown} 
                     onValueChange={(itemValue, itemIndex) => {
                     setScaleInput(scaleArray[itemValue]) }}>
-                    <Picker.Item label='Select scale' value='0' />      
+                    <Picker.Item label='Scale' value='0' />      
                     {Object.keys(scaleArray).map((key) => {
                         return (
                             <Picker.Item label={scaleArray[key]} value={key} key={key}/>) 
@@ -141,152 +136,200 @@ export default function AddEntry({navigation}) {
                     <TouchableOpacity
                         style={styles.addText}
                         onPress={handleListInput}>
-                        <Text style={styles.buttonText}> + </Text>
+                        <Text style={styles.buttonText}>Add mood</Text>
                     </TouchableOpacity>
                 </View>
              </View>
-
-             <View className="displayListContainer" style={styles.listDisplay}>
-                <FlatList 
-                    data={moodList}
+         </View>
+          
+         <View className="listDisplay" style={styles.listDisplay}>
+                <FlatList style={styles.flastListStyle} 
+                    data={moodList} 
+                    numColumns={3}
                     renderItem={({ item, index }) => (
-                    <View className="displayItem" style={{flexDirection: "row"}}>
-                         <Text style={{fontSize: 18, color: 'grey'}}>  {item.name} {item.scale} </Text> 
+                    <View className="listItemBox" style={styles.listItem}>
+                         <Text style={styles.listItem}>{item.name} {item.scale}</Text> 
                          {/* <TouchableOpacity
                             onPress={handleListDelete(index)}>
                              <Text style={{fpaddingLeft: 10, ontWeight: 'bold', color: 'red'}}>x</Text>
                          </TouchableOpacity> */}
                     </View>
+                    )}/>
+            </View>  
 
-                    )}
-                 />
-        
-            </View>
-        
-            <TextInput style={styles.noteInput}
-                placeholder="Notes"
-                editable={true}
-                multiline={true}
-                maxLength={300}
-                onChangeText={text => {
-                    setNote(text);
-                    setCharacters(text.length);
-                    {handleTextChange}
-                }}> 
-            </TextInput>
-            <Text style={{paddingLeft: 12}}>{characters}/300</Text>
-         </View>
-
-         <View className="button"
-            style={styles.buttonContainer}>
-            <TouchableOpacity
-                    style={styles.buttonStyle} 
-                    onPress={checkNoteInput}>
-                        <Text style={styles.buttonText}>Submit</Text>
-            </TouchableOpacity>
-            {/* <Button title='1 button alert' onPress={openAlert}/> */}
-            {/* <MoodItem/> */}
-
-         </View>
-
-          
-        </View>
+         <View className="note" style={styles.note}>
+                <TextInput style={styles.noteInput}
+                    placeholder="Notes"
+                    editable={true}
+                    multiline={true}
+                    maxLength={300}
+                    selectTextOnFocus={false}
+                    onChangeText={text => {
+                        setNote(text);
+                        setCharacters(text.length);
+                        {handleTextChange}
+                    }}> 
+                 </TextInput>
+                 <Text style={styles.description}>{characters}/300</Text>
+                    <View className="button"
+                        style={styles.buttonContainer}>
+                        <TouchableOpacity
+                               style={styles.buttonStyle} 
+                            onPress={checkNoteInput}>
+                                <Text style={styles.buttonText}>Submit</Text>
+                        </TouchableOpacity>
+                    </View>
+             </View>
+    </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 15,
-        backgroundColor: 'white',
-        alignItems: 'center',
- 
+        backgroundColor: '#404C7E',
+        flexDirection: 'column'
     },
-    date: {
+    titleContainer: {
+        height: '8%',
+        justifyContent: 'center'
+    },
+    title: {
+        fontFamily: 'Avenir',
         textAlign: 'center',
         fontSize: 22,
-        color: 'black',
-        paddingTop: 10,
-        paddingBottom: 10,
+        color: 'white',
         fontWeight: 'bold',
     },
-    inputContainer: {
+    description: {
+        textAlign: 'center',
+        fontFamily: 'Avenir',
+        fontSize: 16,
+        color: 'white',
+        letterSpacing: 2
+    },
+    entriesContainer: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '20%',
+    },
+    moodContainer: {
         flexDirection: 'row', 
         alignContent: 'center',
+        justifyContent: 'center'
     },
     inputBox: {
         fontSize: 18,
         margin: 10,
-        height: 30, width: 150,
-        borderColor: 'grey',
+        height: 30, 
+        width: 150,
         borderWidth: 1,
         paddingLeft: 5, 
-        borderLeftColor: 'white', 
-        borderRightColor: 'white', 
-        borderBottomColor: '#C0C0C0', 
-        borderTopColor: 'white',
-    }, 
+        borderColor: '#FFEC9F', 
+        fontFamily: 'Avenir',
+        backgroundColor: '#FFEC9F',
+        borderRadius: 8,
+    },
+    note: {
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        height: '50%',
+        width: '100%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: -3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4,
+        backgroundColor: '#FFEC9F',
+        alignItems: 'center',
+    },
     noteInput: {
-        flexDirection: 'row-reverse',
         fontSize: 18,
         margin: 10,
-        height: 250, width: 325,
-        borderColor: 'grey', 
+        height: 250, 
+        width: 325,
         borderWidth: 1,
-        paddingLeft: 5, 
-        borderLeftColor: 'white', 
-        borderRightColor: 'white', 
-        borderBottomColor: '#C0C0C0', 
-        borderTopColor: 'white',
+        margin: 20,
+        paddingLeft: 10, 
+        borderColor: '#FFEC9F',
+        fontFamily: 'Avenir',
     }, 
     buttonContainer : {
         alignItems: 'center',
         justifyContent: 'center', 
         textAlign: 'center',
-        paddingTop: 15,
+        padding: 5,
     },
     buttonStyle: {
         alignItems: 'center',
         justifyContent: 'center', 
         textAlign: 'center',
-        height: 40, width: 200,
-        backgroundColor: "#699125",
+        backgroundColor: '#A6CDB5',
+        height: 40, 
+        width: 200,
         padding: 10,
         borderRadius: 5,
     },
     buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        padding: 0,
+        color: 'black',
+        fontFamily: 'Avenir'
     },
     addContainer: {
         alignItems: 'center',
         justifyContent: 'center', 
+        textAlign: 'center',
     },
     addText : {
-        height: 20, width: 20,
-        backgroundColor: "#699125",
+        height: 30, 
+        width: 80,
+        margin: 10,
+        borderRadius: 5,
+        backgroundColor: '#A6CDB5',
         textAlign: 'center',
-        borderRadius: 50,
-    }, 
-    dropdownContainer: {
-        flexDirection: 'row', 
-        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center', 
+        textAlign: 'center',
     },
     dropdown: {
         width: 150,
         height: 30,
         fontSize: 18,
-        paddingLeft: 10,
         margin: 10,
         borderRadius: 1,
-        borderColor: "#C0C0C0",
-        borderRadius: 8
+        borderRadius: 8,
+        borderColor: '#FFEC9F',
+        fontFamily: 'Avenir',
+        backgroundColor: '#FFEC9F'
+    },
+    scaleDropdown: {
+        width: 80,
+        height: 30,
+        fontSize: 18,
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 1,
+        borderColor: "#FFEC9F",
+        borderRadius: 8,
+        fontFamily: 'Avenir',
+        backgroundColor: '#FFEC9F'
     },
    listDisplay: {
-       flexDirection: "row",
-       display: 'flex',
-       paddingLeft: 10,
-       marginBottom: 4,
+        flex: 1,
+        fontFamily: 'Avenir',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        height: '22%',
+   }, 
+   listItemBox: {
+        height: '100%',
+        width: '50%',
+   },
+   listItem: {
+        fontFamily: 'Avenir',
+        fontSize: 18,
+        color: 'gray',
+        paddingLeft: 10,
    }
 })

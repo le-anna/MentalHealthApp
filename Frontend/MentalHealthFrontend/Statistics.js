@@ -81,7 +81,7 @@ import moment from 'moment';
       return (
           <View style={styles.container}>
               <View style={styles.dropdownContainer}>
-                <Text>Select Options for Line Graph</Text>
+                <Text style={styles.description}>Select options for line grapoh</Text>
                 <Picker style={styles.dropdown} 
                         onValueChange={(itemValue, itemIndex) => {
                             setSelection(moodDropdown[itemValue]) }}>
@@ -125,7 +125,7 @@ import moment from 'moment';
              
   
 
-              <Text style={styles.chartTitle}> Line Chart: {selection}</Text>
+              <Text style={styles.chartTitle}> Line chart: {selection}</Text>
               <ScrollView horizontal={true}>
               <LineChart
                     data={{
@@ -137,35 +137,36 @@ import moment from 'moment';
                     width={350}
                     yAxisInterval={1}
                     chartConfig={{
-                        backgroundColor: 'rgba(134, 65, 244, ${opacity})',
-                        backgroundGradientFrom: "#91B06B ",
-                        backgroundGradientTo: "#91B06B ",
-                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        backgroundColor: "#FFEC9F",
+                        backgroundGradientFrom: "#FFEC9F",
+                        backgroundGradientTo: "#FFEC9F",
+                        color: (opacity = 1) => `rgba(166, 205, 181, ${opacity})`,
+                        labelColor: (opacity = 1) => `rgba(, 0, 0, ${opacity})`,
                         decimalPlaces: 0,
                         style: {
                             borderRadius: 16,
                         },
                         propsForDots: {
                             r: "6",
-                            strokeWidth: "2",
-                            stroke: "white"
+                            strokeWidth: 1,
+                            stroke: '#A6CDB5'
+
                         }
                     }}
                     bezier
                     style={{
                         marginVertical: 8,
-                        borderRadius: 16
+                        borderRadius: 16,
                     }}
                 />
               </ScrollView>
             
-            <Text style={styles.chartTitle}>Bar Chart for Select Moods</Text>
+            <Text style={styles.chartTitle}>Bar graph of mood frequency</Text>
 
             <TouchableOpacity 
                 style={styles.barButton}
                 onPress={() => navigation.navigate('Mood Selection')}>
-                    <Text style={styles.link}>Click to Select Moods</Text>
+                    <Text style={styles.link}>Click to select moods</Text>
              </TouchableOpacity>
             
               <BarChart
@@ -201,17 +202,26 @@ import moment from 'moment';
 
   const styles = StyleSheet.create({
       container: {
-        backgroundColor: "white",
+        backgroundColor: '#404C7E',
         padding: 15,
         flex: 1,
         alignItems: 'center',
         fontFamily: 'Avenir'
       },
       title: {
+        fontFamily: 'Avenir',
+        textAlign: 'center',
         fontSize: 22,
+        color: 'white',
         fontWeight: 'bold',
-        paddingBottom: 15,
       },
+      description: {
+        textAlign: 'center',
+        fontFamily: 'Avenir',
+        fontSize: 16,
+        color: 'white',
+        letterSpacing: 3
+    },
       dropdownContainer: {
         alignItems: 'center',
     },
@@ -222,8 +232,10 @@ import moment from 'moment';
         paddingLeft: 10,
         margin: 10,
         borderRadius: 1,
-        borderColor: "#C0C0C0",
-        borderRadius: 8
+        borderColor: '#FFEC9F',
+        backgroundColor: '#FFEC9F',
+        borderRadius: 8,
+        fontFamily: 'Avenir',
     },
     datesContainer: {
         flexDirection: 'row'
@@ -239,21 +251,23 @@ import moment from 'moment';
         alignItems: 'center',
         justifyContent: 'center', 
         textAlign: 'center',
-        height: 40, width: 200,
-        backgroundColor: "#699125",
+        height: 40, 
+        width: 200,
+        backgroundColor: '#A6CDB5',
         padding: 10,
         borderRadius: 5,
     },
     buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        padding: 0,
+        color: 'black',
+        fontFamily: 'Avenir'
     },
     chartTitle: {
         fontFamily: 'Avenir',
-        fontSize: 18
+        fontSize: 18,
+        letterSpacing: 2,
+        color: 'white'
     },
     link: {
-        color: '#616C93'
+        color: '#D3D3D3'
     }
   })

@@ -70,18 +70,20 @@ export default function CalendarInfo ({navigation}) {
     container: {
       flex: 1,
       alignItems: 'center', 
-      backgroundColor: 'white',
+      backgroundColor: '#404C7E',
       padding: 15,
     },
     title : {
-      fontSize: 22,
+      fontFamily: 'Avenir',
       textAlign: 'center',
+      fontSize: 22,
+      color: 'white',
       fontWeight: 'bold',
-      padding: 15,
   },
     searchContainer : {
       alignItems: 'center',
       justifyContent: 'center', 
+      padding: 15,
   },
     inputStyle: {
       fontSize: 18,
@@ -91,32 +93,31 @@ export default function CalendarInfo ({navigation}) {
       borderRadius: 5,
       color: 'black',
       paddingLeft: 5,
+      fontFamily: 'Avenir',
   },
-entriesContainer: {
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-  display: 'flex',
-  paddingLeft: 16,
-  paddingRight: 16,
-  paddingBottom: 5,
-  paddingTop: 14,
-  borderTopColor: 'white',
-  borderLeftColor: 'white',
-  borderRightColor: 'white',
-  borderBottomColor: '#bbb',    
-  borderWidth: 1,
-  borderStyle: 'dashed',
-  borderRadius: 5,
-  marginBottom: 4,
-},
-textStyle: {
-  fontSize: 18,
-  paddingBottom: 10,
-},
-noteDate: {
-  fontSize: 14,
-  color: 'grey',
-  paddingLeft: 5,
-}
+    entriesContainer: {
+      flexDirection: 'row',
+      justifyZContent: 'space-between',
+      display: 'flex',
+      paddingLeft: 16,
+      paddingRight: 16,
+      paddingBottom: 5,
+      paddingTop: 14,   
+      borderRadius: 5,
+      marginBottom: 4,
+      backgroundColor: '#FFEC9F',
+      borderColor: '#FFEC9F',
+      fontFamily: 'Avenir',
+    },
+    textStyle: {
+      paddingBottom: 10,
+      fontFamily: 'Avenir',
+    },
+    noteDate: {
+      fontSize: 14,
+      color: 'gray',
+      paddingLeft: 5,
+      fontFamily: 'Avenir',
+    }
   });
    

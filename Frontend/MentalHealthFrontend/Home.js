@@ -24,15 +24,15 @@ export default function Home ({navigation}) {
     return (
         <View style={styles.container}>  
             <ImageBackground source={logo} style={styles.image}>
-            <Text style={styles.text}>
-                 Hello, {""} 
-                 {username}
-            </Text>
-            <TouchableOpacity 
-                style={styles.buttonStyle} 
-                onPress={() => navigation.navigate('AddEntry')}>
-                     <Text style={styles.buttonText}>Add Entry</Text>
-            </TouchableOpacity>
+                <Text style={styles.text}>
+                    Hello, {""} 
+                    {username}
+                </Text>
+                <TouchableOpacity 
+                    style={styles.buttonStyle} 
+                    onPress={() => navigation.navigate('AddEntry')}>
+                        <Text style={styles.buttonText}>Add Entry</Text>
+                </TouchableOpacity>
             </ImageBackground>
 
             <View style={styles.barContianer}>
@@ -40,23 +40,24 @@ export default function Home ({navigation}) {
                     style={styles.barButton}
                     title="View Entries"
                     onPress={() => navigation.navigate('ViewEntry')}>
-                         <FontAwesomeIcon icon="bars" />
+                         <FontAwesomeIcon icon="bars" style={{color: '#A6CDB5'}}/>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.barButton}
                     title="View Statistics"
                     onPress={() => navigation.navigate('Statistics')}>
-                        <FontAwesomeIcon icon="chart-bar" />
+                        <FontAwesomeIcon icon="chart-bar" style={{color: '#A6CDB5'}}/>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.barButton}
                     title="Search"
                     onPress={() => navigation.navigate('Search')}>
-                        <FontAwesomeIcon icon="search" />
+                        <FontAwesomeIcon icon="search" style={{color: '#A6CDB5'}}/>
                 </TouchableOpacity>
             </View>
-        
+
         </View>
+        
     )
 }
 

@@ -81,7 +81,7 @@ export default function ViewEntry ({navigation}) {
                 style={styles.container}>
                 <Text style={styles.title}>Search{"\n"}</Text>
 
-                <View className="dates" style={styles.datesContainer}>
+                <View className="dropdown" style={styles.dropdownContainer}>
                     <Picker style={styles.dropdown} 
                         onValueChange={(itemValue, itemIndex) => {
                              setTest(dateDropdown[itemValue]) }}>
@@ -109,7 +109,7 @@ export default function ViewEntry ({navigation}) {
                         onPress={() => {
                             setUrl(`http://localhost:8080/${test}` + `/user/1/moods`);
                         }}> 
-                        <FontAwesomeIcon icon="sync" /> 
+                        <FontAwesomeIcon icon="sync" style={{ color: '#A6CDB5' }}/> 
                     </TouchableOpacity>
                 
                 <View className="entries">
@@ -119,13 +119,13 @@ export default function ViewEntry ({navigation}) {
                                 <View style={styles.entriesContainer}
                                         keyExtractor={item => item.id.toString()}>
                                     <Text style={styles.textStyle}> 
-                                        {item.name} {": "} {item.scale} </Text>
+                                        {item.name}{" "}{item.scale} </Text>
                                          <TouchableOpacity style={styles.trashIcon}
                                             onPress={() => {
                                                 setDeleteMood(item.id);
                                                 setIsMoodDelete(true);
                                                 setUrl(`http://localhost:8080/user/1${test}` + `/notes`);}}>
-                                            <FontAwesomeIcon icon="trash" />
+                                            <FontAwesomeIcon icon="trash" style={{ color: '#A6CDB5' }}/>
                                         </TouchableOpacity>
                                 </View>
                             )}
@@ -145,7 +145,7 @@ export default function ViewEntry ({navigation}) {
                                                 setIsNoteDelete(true);
                                                 setUrl(`http://localhost:8080/user/1`);
                                             }} >
-                                            <FontAwesomeIcon icon="trash" />
+                                            <FontAwesomeIcon icon="trash" style={{ color: '#A6CDB5' }}/>
                                         </TouchableOpacity>
                                 </View>
                             )}
@@ -162,14 +162,16 @@ export default function ViewEntry ({navigation}) {
 const styles = StyleSheet.create({
     container: { 
       flex: 1,
-      backgroundColor: 'white',
+      backgroundColor: '#404C7E',
       padding: 15,
       fontFamily: 'Avenir',
     },
     title : {
-        fontSize: 22,
+        fontFamily: 'Avenir',
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontSize: 22,
+        color: 'white',
+        fontWeight: 'bold',
     },
     buttonContainer : {
         alignItems: 'center',
@@ -184,47 +186,46 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 40,
         width: 200,
-        backgroundColor: "#699125",
+        backgroundColor: '#A6CDB5',
         padding: 10,
         borderRadius: 5,
     },
     buttonText: {
-        color: 'white',
-        fontWeight: 'bold',
-        padding: 0,
+        color: 'black',
+        fontFamily: 'Avenir'
     },
     trashIcon: {
         alignSelf: 'flex-end',
         paddingBottom: 12,
     },
     entriesContainer: {
-        flexDirection: "row",
+        flexDirection: 'row',
         justifyContent: 'space-between',
         display: 'flex',
         paddingLeft: 16,
         paddingRight: 16,
         paddingBottom: 5,
-        paddingTop: 14,
-        borderColor: '#bbb',    
+        paddingTop: 14, 
         borderWidth: 1,
-        borderStyle: 'dashed',
         borderRadius: 5,
-        marginBottom: 4,
+        backgroundColor: '#FFEC9F',
+        borderColor: '#FFEC9F',
+        fontFamily: 'Avenir',
     },
     noteContainer: {
-        paddingTop: 20,
-        marginBottom: 4,
+        paddingTop: 15,
     },
     note: {
-        flexDirection: "row",
+        flexDirection: 'row',
         justifyContent: 'space-between',
         display: 'flex',
         paddingBottom: 10,
         padding: 16,
-        borderColor: '#bbb',
         borderWidth: 1,
-        borderStyle: 'dashed',
-        borderRadius: 5
+        borderRadius: 5,
+        backgroundColor: '#FFEC9F',
+        borderColor: '#FFEC9F',
+        fontFamily: 'Avenir',
     },
     reloadIcon : {
         alignSelf: 'flex-end',
@@ -241,7 +242,9 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         margin: 10,
         borderRadius: 1,
-        borderColor: "#C0C0C0",
+        borderColor: '#FFEC9F',
+        backgroundColor: '#FFEC9F',
         borderRadius: 8,
+        fontFamily: 'Avenir',
     },
 });
